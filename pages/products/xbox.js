@@ -2,11 +2,11 @@ import Head from 'next/head'
 import Link from 'next/link'
 import Layout from '../../components/layout'
 
-export default function Product() {
+export default function Product({}) {
   return (
     <Layout>
       <Head>
-        <title>Checkmate</title>
+        <title>{}</title>
       </Head>
       <h1>Xbox Series One X</h1>
         <Link href="/">
