@@ -5,6 +5,7 @@ import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import tripleCardStyle from '../css/tripleCard.module.css'
+import SingleCard from '../components/singleCard'
 
 
 const Item = styled(Paper)(({ theme }) => ({
@@ -30,21 +31,15 @@ export default function TripleCard({
   }}) {
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <Grid container spacing={6}>
+      <Grid container rowSpacing={1} columnSpacing={{ xs: 1, md: 5 }}>
         <Grid item xs={12} md={4}>
-          <Item>
-            {cardOne.title}
-          </Item>
+          <SingleCard text={cardOne}></SingleCard>
         </Grid>
         <Grid item xs={12} md={4}>
-          <Item>
-            {cardTwo.title}
-          </Item>
+          <SingleCard text={cardTwo}></SingleCard>
         </Grid>
         <Grid item xs={12} md={4}>
-          <Item>
-            {cardThree.title}
-          </Item>
+          <SingleCard text={cardThree}></SingleCard>
         </Grid>
 
       </Grid>

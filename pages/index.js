@@ -19,9 +19,9 @@ export default function Home() {
       </div>
 
       <TripleCard
-        cardOne = {{ title: "Card number one", content: "content" }}
-        cardTwo = {{ title: "card nubmer two", content: "contenttwo" }}
-        cardThree = {{ title: "XXX", content: "hello" }}>
+        cardOne = {{ title: "", content: "Never lose track when your product is back in stock" }}
+        cardTwo = {{ title: "", content: "Avoid spam by never giving your email for notifications again" }}
+        cardThree = {{ title: "", content: "Get instant notifications when a product is back in stock" }}>
       </TripleCard>
 
 
