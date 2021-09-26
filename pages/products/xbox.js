@@ -1,10 +1,10 @@
 import Head from 'next/head'
 import Link from 'next/link'
-import Layout from '../../components/layout'
+import BaseLayout from '../../components/BaseLayout'
 
 export default function Product({}) {
   return (
-    <Layout>
+    <BaseLayout>
       <Head>
         <title>{}</title>
       </Head>
@@ -12,6 +12,6 @@ export default function Product({}) {
         <Link href="/">
           <a>Back to home</a>
         </Link>
-    </Layout>
+    </BaseLayout>
   )
 }

@@ -1,12 +1,12 @@
-import Layout from '../../components/layout'
+import BaseLayout from '../../components/base'
 import Header from '../../components/header'
 
 export default function Product() {
   return (
     <>
-    <Layout>
-      <h1>THIS IS THE LAYOUT BODY FOR products</h1>
-    </Layout>
+    <BaseLayout>
+      <h1>THIS IS THE BaseLayout BODY FOR products</h1>
+    </BaseLayout>
     <Header />
     </>
   )
