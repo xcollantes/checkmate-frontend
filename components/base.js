@@ -1,6 +1,7 @@
 import Head from 'next/head'
 import Image from 'next/image'
 import Link from 'next/link'
+import Container from '@mui/material/Container';
 import TopAppBar from './appbar.js'
 import baseStyles from '../css/base.module.css'
 import utilStyles from '../css/utils.module.css'
@@ -27,25 +28,23 @@ export default function BaseLayout({ children, home }) {
         <meta name="keywords" content={configData.METADATA.WEBSITE_TAGS} />
         <meta name="og:title" content={configData.METADATA.WEBSITE_NAME} />
         <meta name="twitter:card" content="summary_large_image" />
-        <link
-          rel="stylesheet"
-          href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
-        />
         <title>{configData.METADATA.WEBSITE_NAME}</title>
       </Head>
 
       <TopAppBar></TopAppBar>
 
-      <div className={baseStyles.pageContent}>
-      {children}
-      {!home && (
-        <div className={baseStyles.backToHome}>
-          <Link href="/">
-            <a>← Back to home</a>
-          </Link>
+      <Container>
+        <div className={baseStyles.pageContent}>
+        {children}
+        {!home && (
+          <div className={baseStyles.backToHome}>
+            <Link href="/">
+              <a>← Back to home</a>
+            </Link>
+          </div>
+        )}
         </div>
-      )}
-      </div>
+      </Container>
       </>
   )
 }

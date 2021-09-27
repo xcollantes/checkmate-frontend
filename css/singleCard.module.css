@@ -1,1 +1,7 @@
+.cardText {
+  height: 8rem;
+}
 
+.cardIcon {
+  margin-bottom: -100px;
+}
