@@ -10,17 +10,19 @@ import singleCardStyle from '../css/singleCard.module.css'
 
 import emailImage from '../public/images/email.svg'
 
-export default function SingleCard(cardData) {
+export default function SingleCard(props) {
+  console.log("singleCard");
+  console.log({props});
   return (
     <Card raised>
-      <Image src={emailImage}
+      <Image src={props.cardData.icon.emailImage}
              height="170em"
              className={singleCardStyle.cardIcon}/>
       <CardContent className={singleCardStyle.cardText}>
         <Typography variant="subtitle1"
                     align="center"
                     color="text.primary">
-          {cardData.content}
+          {props.cardData.content}
         </Typography>
       </CardContent>
       <CardActions>

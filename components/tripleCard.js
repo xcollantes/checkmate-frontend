@@ -16,7 +16,7 @@ const Item = styled(Paper)(({ theme }) => ({
   color: theme.palette.text.secondary,
 }));
 
-export default function TripleCard( ...props ) {
+export default function TripleCard( props ) {
   console.log({props});
   return (
     <Box sx={{ flexGrow: 1 }}>
