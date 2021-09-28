@@ -1,0 +1,16 @@
+.container {
+  text-align: center;
+  margin: 8em auto;
+}
+
+.header {
+  flex-direction: column;
+}
+
+.pageContent {
+  /* margin: 3rem 8rem; */
+}
+
+.backToHome {
+  margin: 3rem 0 0;
+}

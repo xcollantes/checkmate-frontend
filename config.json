@@ -1,0 +1,15 @@
+{
+  "__comment": "Global variables for Checkmate frontend.",
+  "METADATA": {
+    "WEBSITE_NAME": "Checkmate",
+    "TAGLINE": "One subscription.  All your favorite stores.",
+    "WEBSITE_DESCRIPTION": "Web app for automatic notifications when your product is in stock.",
+    "CONTACT_EMAIL": "@checkmate.edu",
+    "WEBSITE_TAGS": "Stock, notifications, alert, products"
+  },
+  "COLOR_SCHEME": {
+    "PRIMARY": "",
+    "SECONDARY": "",
+    "BUTTONS": ""
+  }
+}

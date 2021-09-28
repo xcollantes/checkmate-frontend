@@ -1,13 +1,12 @@
-import Layout from '../../components/layout'
-import Header from '../../components/header'
+import BaseLayout from '../../components/base'
+import TestProps from '../../components/header'
 
 export default function Product() {
   return (
-    <>
-    <Layout>
-      <h1>THIS IS THE LAYOUT BODY FOR products</h1>
-    </Layout>
-    <Header />
-    </>
+    <BaseLayout>
+      <TestProps phrase={{ greeting: "hello there", name: "xavier" }}>
+        <h1>THIS IS THE BaseLayout BODY FOR products</h1>
+      </TestProps>
+    </BaseLayout>
   )
 }
