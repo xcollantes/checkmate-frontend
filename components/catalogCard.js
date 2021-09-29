@@ -8,15 +8,14 @@ import CardActions from '@mui/material/CardActions'
 import Typography from '@mui/material/Typography'
 
 
-export default function CatalogCard() {
+export default function CatalogCard( props ) {
   return (
     <Card raised>
       <CardContent>
-        <p>CardContent</p>
-
+        {props.title}
       </CardContent>
       <CardActions>
-        <p>CardActions</p>
+        {props.action}
       </CardActions>
     </Card>
   )
