@@ -1,0 +1,70 @@
+---
+# Application input for provider-products to go check.
+# TEST ONLY
+
+# Next ID: 7
+# ID usage - do not reuse IDs.  One ID per provider-product pairing.
+
+products:
+  - product:
+      product_name: Xbox Series X
+      providers:
+        - provider:
+            provider_name: Best Buy
+            check_id: 1
+            target_text: SOLD OUT
+            target_description: Sold out button.
+            url: https://www.bestbuy.com/site/microsoft-xbox-series-x-1tb-console-black/6428324.p?skuId=6428324
+            xpath: "/html/body/div[3]/main/div[2]/div[3]/div[2]/div/div/div[8]/div[1]/div/div/div/button"
+        - provider:
+            provider_name: GameStop
+            check_id: 2
+            target_text: NOT AVAILABLE
+            target_description: Gray rectangle.
+            url: https://www.gamestop.com/video-games/xbox-series-x/consoles/products/xbox-series-x/B224744V.html
+            xpath: "/html/body/div[6]/div[4]/div[2]/div[1]/div/div[2]/div[2]/div[3]/div[9]/div[2]/div/div[1]/button"
+        - provider:
+            provider_name: Target
+            check_id: 3
+            target_text: Out of stock in stores near you
+            target_description: Gray box with gray text.  Local store shown.
+            url: https://www.target.com/p/xbox-series-x-console/-/A-80790841
+            xpath: "/html/body/div[1]/div/div[4]/div/div[2]/div[3]/div[1]/div/div[1]/div/div[1]"
+        - provider:
+            provider_name: NewEgg
+            check_id: 4
+            target_text: OUT OF STOCK.
+            target_description: Capilatized text with red exclamation sign before text.
+            url: https://www.newegg.com/p/68-105-273?nm_mc=AFC-RAN-COM
+            xpath: "/html/body/div[6]/div[2]/div[1]/div/div/div[2]/div[1]/div[5]/div[3]/div/strong"
+  - product:
+      product_name: 9mm ammunition
+      providers:
+        - provider:
+            provider_name: Palmetto
+            check_id: 5
+            target_text: NOTIFY ME WHEN BACK IN STOCK
+            target_description: Blue rectangle.
+            url: https://palmettostatearmory.com/remington-umc-9mm-115-gr-fmj-ammo-350-box-23635.html
+            xpath: "/html/body/div[2]/main/div[2]/div/div[2]/div[6]/a"
+        - provider:
+            provider_name: MidwayUSA
+            check_id: 6
+            target_text: Out of Stock, No Backorder
+            target_description: Blue text above flag.
+            url: https://www.midwayusa.com/product/1000171533
+            xpath: "/html/body/div[1]/div[2]/div[2]/div[2]/div[4]/div[2]/div/div[1]/div[2]/mw-modal-trigger/button"
+
+
+
+# Template
+#
+# - product:
+#     product_name:
+#     providers:
+#       - provider:
+#           provider_name:
+#           target_text:
+#           target_description:
+#           url:
+#           xpath: ""

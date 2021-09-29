@@ -8,27 +8,23 @@ import CatalogCard from '../components/catalogCard'
 
 
 export default function CatalogGrid( {children} ) {
-  const rowContent = (
-    <Grid item xs={12} md={3}>
-      <CatalogCard title="hello"
-                   action="See more">
-      </CatalogCard>
-    </Grid>
-  )
+  // const rowContent = ()
 
-  let resultSet = [];
-  for (let set = 0; set <= 3; set++) {
-    let resultRow = [];
-    for (let row = 0; row <= 3; row++) {
-      resultRow.push(rowContent);
-    }
-    resultSet.push(resultRow);
+  let resultRow = [];
+  for (let row = 0; row <= 100; row++) {
+    resultRow.push(
+      <Grid item xs={12} sm={6} md={3}>
+        <CatalogCard title="hello"
+                     action="See more">
+        </CatalogCard>
+      </Grid>
+    );
   }
 
   return (
       <Box sx={{ flexGrow: 1 }}>
         <Grid container spacing={2}>
-          {resultSet}{children}
+          {resultRow}{children}
         </Grid>
       </Box>
   )
