@@ -13,6 +13,7 @@ export default function CatalogCard( product ) {
     <Card raised>
       <CardContent>
         {product.title}
+        {product.body}
       </CardContent>
       <CardActions>
         {product.action}
