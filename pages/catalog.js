@@ -1,4 +1,4 @@
-import * as React from 'react'
+import { useState } from 'react'
 import { useRouter } from 'next/router'
 import { styled } from '@mui/material/styles'
 import Divider from '@mui/material/Divider'
@@ -22,6 +22,9 @@ import ContentCopy from '@mui/icons-material/ContentCopy'
 import ContentPaste from '@mui/icons-material/ContentPaste'
 import Cloud from '@mui/icons-material/Cloud'
 
+
+
+
 // getStaticProps will never send data on the client.
 // Must be called from under pages/
 export async function getStaticProps() {
@@ -36,31 +39,36 @@ export async function getStaticProps() {
   }
 }
 
-
-
-
-
-
 const menuItems = [
   {
     "_id": 1,
-    "name": "Car"
+    "name": "Car",
+    "selected": true
   },
   {
     "_id": 2,
-    "name": "Clothes"
+    "name": "Clothes",
+    "selected": true
   },
   {
     "_id": 3,
-    "name": "Computers"
+    "name": "Computers",
+    "selected": true
   },
   {
     "_id": 4,
-    "name": "Food"
+    "name": "Food",
+    "selected": true
   },
   {
     "_id": 5,
-    "name": "Ammunition"
+    "name": "Ammunition",
+    "selected": true
+  },
+  {
+    "_id": 6,
+    "name": "Empty",
+    "selected": true
   }
 ]
 
@@ -88,48 +96,99 @@ const products = [
     "name": "RTX 3080",
     "catagory": "Computers",
     "price": 1000
+  },
+  {
+    "_id": 5,
+    "name": "AMD Ryzen",
+    "catagory": "Computers",
+    "price": 300
+  },
+  {
+    "_id": 6,
+    "name": "Intel",
+    "catagory": "Computers",
+    "price": 325
+  },
+  {
+    "_id": 7,
+    "name": "Keyboard",
+    "catagory": "Computers",
+    "price": 300
+  },
+  {
+    "_id": 8,
+    "name": "Logitech webcam",
+    "catagory": "Computers",
+    "price": 300
   }
 ]
 
-function buildCatalogGrid( cardContent ) {
-  // let resultRow = []
-  // for (let row = 0 row <= 100 row++) {
-  //   resultRow.push(
-      // <Grid item xs={12} sm={6} md={4}>
-      //   <CatalogCard title={cardContent.location.name}
-      //                action="See more">
-      //   </CatalogCard>
-      // </Grid>
-  //   )
-  // }
 
-  console.log(cardContent)
-  return (
-      cardContent.filter(value => value.catagory === "Car")
-                 .map(value =>
-                   <Grid item xs={12} sm={6} md={4}>
-                     <CatalogCard title={value.name}
-                                  body={value.price}
-                                  action="See more">
-                     </CatalogCard>
-                   </Grid>
-                 )
-  )
-}
 
-function buildMenuItems( items ) {
-  return (
-    items.map(value =>
-      <FormControlLabel control={<Checkbox defaultChecked />}
-                        label={value.name} />
-    )
-  )
-}
+
+
+
 
 export default function Catalog( props ) {
-  console.log({props})
+  let selectedState = menuItems // Default all items selected
+  console.log("FIRST STATE: " + selectedState)
 
-  const label = { inputProps: { 'aria-label': 'Checkbox demo' } }
+  function handleChangeMenu(event) {
+    console.log("STATE BEFORE EVENT: " + selectedState)
+    console.log("CHANGE: " + event.target.name)
+    console.log("CHANGE: " + event.target.checked)
+
+    let changeItem = selectedState.filter(value => value.name === event.target.name)
+    changeItem = event.target.checked
+
+    buildCatalogGrid(products)
+    console.log("CHANGED: " + changeItem)
+  }
+
+  function buildMenuItems(items) {
+    return (
+      items.map(value =>
+        <FormControlLabel control={<Checkbox defaultChecked />}
+                          name={value.name}
+                          onChange={event => handleChangeMenu(event)}
+                          label={value.name} />
+      )
+    )
+  }
+
+  function buildCatalogGrid(products) {
+    // let resultRow = []
+    // for (let row = 0 row <= 100 row++) {
+    //   resultRow.push(
+        // <Grid item xs={12} sm={6} md={4}>
+        //   <CatalogCard title={cardContent.location.name}
+        //                action="See more">
+        //   </CatalogCard>
+        // </Grid>
+    //   )
+    // }
+
+    console.log(selectedState)
+    let selectedCatagories = []
+    selectedState.forEach((item, i) => {
+      selectedCatagories.push(item.name)
+    })
+
+    console.log("SELECTED CATAGORIES")
+    console.log(selectedCatagories)
+    return (
+      products.filter(value => selectedCatagories.includes(value.catagory)) // Filter the one changed catagory
+                .map(value =>
+                  <Grid item xs={12} sm={6} md={4}>
+                    <CatalogCard title={value.name}  // From Products
+                                 body={value.price}  // From Products
+                                 action="See more">
+                    </CatalogCard>
+                  </Grid>
+                )
+    )
+  }
+
   return (
     <BaseLayout catalog>
       <Box sx={{ mt: '3em', width: '100%' }}>
