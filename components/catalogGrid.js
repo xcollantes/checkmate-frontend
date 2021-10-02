@@ -4,11 +4,13 @@ import { styled } from '@mui/material/styles'
 import Box from '@mui/material/Box'
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
-import Typography from '@mui/material/Typography'
+import FormGroup from '@mui/material/FormGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Checkbox from '@mui/material/Checkbox';
 import CatalogCard from '../components/catalogCard'
 
 
-export default function CatalogGrid( {xxx} ) {
+export default function CatalogGrid( props ) {
   // const rowContent = ()
 
   console.log({xxx});
