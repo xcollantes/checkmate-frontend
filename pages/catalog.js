@@ -130,19 +130,25 @@ const products = [
 
 
 export default function Catalog( props ) {
-  let selectedState = menuItems // Default all items selected
-  console.log("FIRST STATE: " + selectedState)
+  const [selectedCatagories, setSelectedCatagories] = useState(menuItems)  // Default all items selected
 
   function handleChangeMenu(event) {
-    console.log("STATE BEFORE EVENT: " + selectedState)
-    console.log("CHANGE: " + event.target.name)
-    console.log("CHANGE: " + event.target.checked)
+    console.log("STATE BEFORE EVENT: ")
+    console.log(selectedCatagories)
 
-    let changeItem = selectedState.filter(value => value.name === event.target.name)
-    changeItem = event.target.checked
+    let newSelected = selectedCatagories
+    newSelected.forEach(catagory => {
+      if (catagory.name == event.target.name) {
+        catagory.selected = event.target.checked
+      }
+    })
 
-    buildCatalogGrid(products)
-    console.log("CHANGED: " + changeItem)
+    console.log(newSelected)
+    setSelectedCatagories(newSelected)
+
+    console.log("NEW STATE: ")
+    console.log(selectedCatagories)
+    
   }
 
   function buildMenuItems(items) {
@@ -168,17 +174,15 @@ export default function Catalog( props ) {
     //   )
     // }
 
-    console.log(selectedState)
-    let selectedCatagories = []
-    selectedState.forEach((item, i) => {
-      selectedCatagories.push(item.name)
-    })
+
+
+
 
     console.log("SELECTED CATAGORIES")
-    console.log(selectedCatagories)
+
+    let productsToRender = products.filter(product => product.catagory === "Car")
     return (
-      products.filter(value => selectedCatagories.includes(value.catagory)) // Filter the one changed catagory
-                .map(value =>
+      productsToRender.map(value =>
                   <Grid item xs={12} sm={6} md={4}>
                     <CatalogCard title={value.name}  // From Products
                                  body={value.price}  // From Products

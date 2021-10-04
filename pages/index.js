@@ -1,4 +1,5 @@
 import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography'
 import FloatingActionButtons from '../components/actionButton'
 import TripleCard from '../components/tripleCard'
 import BaseLayout from '../components/base'
@@ -23,8 +24,15 @@ export default function Home() {
           cardThree = {{ icon: {emailImage}, content: "Get instant notifications when a product is back in stock" }}>
         </TripleCard>
       </Box>
+      <Box sx={{ bgcolor: "yellow" }}>
 
-      
+      <Typography variant="header1"></Typography>
+      <TripleCard
+        cardOne = {{ icon: {emailImage}, content: "1" }}
+        cardTwo = {{ icon: {emailImage}, content: "2" }}
+        cardThree = {{ icon: {emailImage}, content: "3" }}>
+      </TripleCard>
+      </Box>
     </BaseLayout>
   )
 }
