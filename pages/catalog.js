@@ -133,22 +133,15 @@ export default function Catalog( props ) {
   const [selectedCatagories, setSelectedCatagories] = useState(menuItems)  // Default all items selected
 
   function handleChangeMenu(event) {
-    console.log("STATE BEFORE EVENT: ")
-    console.log(selectedCatagories)
+    let { name, checked } = event.target
 
-    let newSelected = selectedCatagories
-    newSelected.forEach(catagory => {
-      if (catagory.name == event.target.name) {
-        catagory.selected = event.target.checked
-      }
-    })
-
-    console.log(newSelected)
-    setSelectedCatagories(newSelected)
-
-    console.log("NEW STATE: ")
-    console.log(selectedCatagories)
-    
+    // https://stackoverflow.com/a/69446324/8278075 
+    setSelectedCatagories(filters => (
+      filters.map(filter => filter.name == name ? {
+        ...filter,
+        selected: checked
+      } : filter)
+    ))
   }
 
   function buildMenuItems(items) {
@@ -162,7 +155,7 @@ export default function Catalog( props ) {
     )
   }
 
-  function buildCatalogGrid(products) {
+  function buildCatalogGrid() {
     // let resultRow = []
     // for (let row = 0 row <= 100 row++) {
     //   resultRow.push(
@@ -174,13 +167,18 @@ export default function Catalog( props ) {
     //   )
     // }
 
+    let listItemsSelected = []
+    selectedCatagories.map(obj => {
+      if (obj.selected) {
+        listItemsSelected.push(obj.["name"])
+      }
+    })
 
-
-
-
-    console.log("SELECTED CATAGORIES")
-
-    let productsToRender = products.filter(product => product.catagory === "Car")
+    let productsToRender = products.filter(
+      product => listItemsSelected.includes(product.catagory)
+    )
+    console.log("products to render")
+    console.log(productsToRender)
     return (
       productsToRender.map(value =>
                   <Grid item xs={12} sm={6} md={4}>
@@ -208,7 +206,7 @@ export default function Catalog( props ) {
           <Grid item xs={12} md={9}>
             <Box sx={{ flexGrow: 1 }}>
               <Grid container spacing={3}>
-                {buildCatalogGrid(products)}
+                {buildCatalogGrid()}
               </Grid>
             </Box>
           </Grid>
