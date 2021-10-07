@@ -135,7 +135,7 @@ export default function Catalog( props ) {
   function handleChangeMenu(event) {
     let { name, checked } = event.target
 
-    // https://stackoverflow.com/a/69446324/8278075 
+    // https://stackoverflow.com/a/69446324/8278075
     setSelectedCatagories(filters => (
       filters.map(filter => filter.name == name ? {
         ...filter,
@@ -181,7 +181,7 @@ export default function Catalog( props ) {
     console.log(productsToRender)
     return (
       productsToRender.map(value =>
-                  <Grid item xs={12} sm={6} md={4}>
+                  <Grid item xs={12} sm={6}>
                     <CatalogCard title={value.name}  // From Products
                                  body={value.price}  // From Products
                                  action="See more">

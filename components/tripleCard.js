@@ -16,20 +16,27 @@ const Item = styled(Paper)(({ theme }) => ({
   color: theme.palette.text.secondary,
 }));
 
-export default function TripleCard( props ) {
-  console.log({props});
+export default function TripleCard({
+    cardOneIcon,
+    cardOneContent,
+    cardTwoIcon,
+    cardTwoContent,
+    cardThreeIcon,
+    cardThreeContent
+  }) {
+  
   return (
     <Box sx={{ flexGrow: 1 }}>
       <Grid container rowSpacing={1} columnSpacing={{ xs: 1, md: 5 }}>
         <Grid item xs={12} md={4}>
-          <SingleCard cardData={props.cardOne}></SingleCard>
+          <SingleCard iconImage={cardOneIcon}></SingleCard>
 
         </Grid>
         <Grid item xs={12} md={4}>
-          <SingleCard cardData={props.cardTwo}></SingleCard>
+          <SingleCard iconImage={cardTwoIcon}></SingleCard>
         </Grid>
         <Grid item xs={12} md={4}>
-          <SingleCard cardData={props.cardThree}></SingleCard>
+          <SingleCard iconImage={cardThreeIcon}></SingleCard>
         </Grid>
 
       </Grid>

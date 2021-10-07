@@ -12,17 +12,19 @@ import emailImage from '../public/images/email.svg'
 
 export default function SingleCard(props) {
   console.log("singleCard");
-  console.log({props});
+  // console.log({...props});
+
+  console.log(props.iconImage);
   return (
     <Card raised>
-      <Image src={props.cardData.icon.emailImage}
+      <Image src={props.iconImage}
              height="170em"
              className={singleCardStyle.cardIcon}/>
       <CardContent className={singleCardStyle.cardText}>
         <Typography variant="subtitle1"
                     align="center"
                     color="text.primary">
-          {props.cardData.content}
+
         </Typography>
       </CardContent>
       <CardActions>
