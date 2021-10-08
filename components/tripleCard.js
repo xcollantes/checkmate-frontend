@@ -24,19 +24,22 @@ export default function TripleCard({
     cardThreeIcon,
     cardThreeContent
   }) {
-  
+
   return (
     <Box sx={{ flexGrow: 1 }}>
       <Grid container rowSpacing={1} columnSpacing={{ xs: 1, md: 5 }}>
         <Grid item xs={12} md={4}>
-          <SingleCard iconImage={cardOneIcon}></SingleCard>
+          <SingleCard iconImage={cardOneIcon}
+                      cardContent={cardOneContent}></SingleCard>
 
         </Grid>
         <Grid item xs={12} md={4}>
-          <SingleCard iconImage={cardTwoIcon}></SingleCard>
+          <SingleCard iconImage={cardTwoIcon}
+                      cardContent={cardTwoContent}></SingleCard>
         </Grid>
         <Grid item xs={12} md={4}>
-          <SingleCard iconImage={cardThreeIcon}></SingleCard>
+          <SingleCard iconImage={cardThreeIcon}
+                      cardContent={cardThreeContent}></SingleCard>
         </Grid>
 
       </Grid>
