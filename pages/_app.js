@@ -5,22 +5,24 @@ import React from 'react';
 import global from '../css/global.css'
 import { createTheme, ThemeProvider, styled } from '@mui/material/styles';
 
+
+// Overrides default Material UI: https://mui.com/customization/default-theme
 const theme = createTheme({
-  palette: {
-    primary: {
-      main: "#001e3c"
-    },
-    secondary: {
-      main: "#ffa500"
-    }
-  }
+  // palette: {
+  //   primary: {
+  //     main: "#001e3c"
+  //   },
+  //   secondary: {
+  //     main: "#ffa500"
+  //   }
+  // }
 });
 
 export default function App({ Component, pageProps }) {
   return (
-    <>
-    <Component {...pageProps} />
-    </>
+    <ThemeProvider theme={theme}>
+      <Component {...pageProps} />
+    </ThemeProvider>
   )
 }
 
