@@ -33,7 +33,7 @@ export default function BaseLayout({ children, home }) {
         <title>{configData.METADATA.WEBSITE_NAME}</title>
       </Head>
 
-      <TopAppBar></TopAppBar>
+      <TopAppBar isHome={home}></TopAppBar>
 
       <Container>
         <div className={baseStyles.pageContent}>
