@@ -2,31 +2,31 @@
   {
     "_id": 1,
     "name": "Car",
-    "selected": true
+    "filter": false
   },
   {
     "_id": 2,
     "name": "Clothes",
-    "selected": true
+    "filter": false
   },
   {
     "_id": 3,
     "name": "Computers",
-    "selected": true
+    "filter": false
   },
   {
     "_id": 4,
     "name": "Food",
-    "selected": true
+    "filter": false
   },
   {
     "_id": 5,
     "name": "Ammunition",
-    "selected": true
+    "filter": false
   },
   {
     "_id": 6,
     "name": "Empty",
-    "selected": true
+    "filter": false
   }
 ]
