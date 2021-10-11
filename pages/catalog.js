@@ -31,11 +31,11 @@ export default function Catalog(props) {
   function buildMenuItems(items) {
     return (
       items.map(value =>
-        <FormControlLabel control={<Checkbox defaultChecked />}
+        <FormControlLabel control={<Checkbox />}
                           name={value.name}
                           onChange={event => handleChangeMenu(event)}
                           label={value.name}
-                          key={value.name}/>
+                          key={value.name} />
       )
     )
   }
@@ -68,7 +68,7 @@ export default function Catalog(props) {
   return (
     <BaseLayout catalog>
       <Box sx={{ mt: "1rem" }}>
-        <SearchBar default="thsi is default"></SearchBar>
+        <SearchBar default=""></SearchBar>
       </Box>
       <Box sx={{ mt: '1em', width: '100%' }}>
         <Grid container justifyContent="space-evenly">

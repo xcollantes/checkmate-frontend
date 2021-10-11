@@ -15,28 +15,25 @@ export default function CatalogCard( product ) {
   let formattedPrice = "$" + product.body.toLocaleString(
     "en-US", {minimumFractionDigits: 2})  // TODO: Localize
 
-  console.log("USING IMAGE PATH: ")
-  console.log(product.image)
+    return (
+      <Card raised>
 
-  return (
-    <Card raised>
+        <CardContent>
+          <div style={{ height: "15rem", position: "relative" }}>
+            <Image src={product.image} layout="fill" objectFit="contain" />
+          </div>
+          <Typography>{product.title}</Typography>
+          <Typography varient="subheader1">{formattedPrice}</Typography>
+        </CardContent>
 
-      <CardContent>
-        <div style={{ height: "15rem", position: "relative" }}>
-          <Image src={product.image} layout="fill" objectFit="contain" />
-        </div>
-        <Typography>{product.title}</Typography>
-        <Typography varient="subheader1">{formattedPrice}</Typography>
-      </CardContent>
+        <CardActions>
+          <Button variant="outlined" size="small">
+            <AddShoppingCartIcon fontSize="small" />Add
+          </Button>
 
-      <CardActions>
-        <Button variant="outlined" size="small">
-          <AddShoppingCartIcon fontSize="small" />Add
-        </Button>
+          <Button variant="text" size="small">Details</Button>
+        </CardActions>
 
-        <Button variant="text" size="small">Details</Button>
-      </CardActions>
-
-    </Card>
-  )
+      </Card>
+    )
 }

@@ -8,6 +8,7 @@ export default function SearchBar(props) {
 
   return (
     <Autocomplete
+        value={props.default}
         options={productOptions}
         autoSelect
         autoComplete
