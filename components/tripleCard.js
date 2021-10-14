@@ -1,9 +1,9 @@
 import * as React from 'react';
-import { styled } from '@mui/material/styles';
-import Box from '@mui/material/Box';
-import Paper from '@mui/material/Paper';
-import Grid from '@mui/material/Grid';
-import Typography from '@mui/material/Typography';
+import { styled } from '@mui/material/styles'
+import Box from '@mui/material/Box'
+import Paper from '@mui/material/Paper'
+import Grid from '@mui/material/Grid'
+import Typography from '@mui/material/Typography'
 import tripleCardStyle from '../css/tripleCard.module.css'
 import SingleCard from '../components/singleCard'
 
@@ -16,20 +16,30 @@ const Item = styled(Paper)(({ theme }) => ({
   color: theme.palette.text.secondary,
 }));
 
-export default function TripleCard( props ) {
-  console.log({props});
+export default function TripleCard({
+    cardOneIcon,
+    cardOneContent,
+    cardTwoIcon,
+    cardTwoContent,
+    cardThreeIcon,
+    cardThreeContent
+  }) {
+
   return (
     <Box sx={{ flexGrow: 1 }}>
       <Grid container rowSpacing={1} columnSpacing={{ xs: 1, md: 5 }}>
         <Grid item xs={12} md={4}>
-          <SingleCard cardData={props.cardOne}></SingleCard>
+          <SingleCard iconImage={cardOneIcon}
+                      cardContent={cardOneContent}></SingleCard>
 
         </Grid>
         <Grid item xs={12} md={4}>
-          <SingleCard cardData={props.cardTwo}></SingleCard>
+          <SingleCard iconImage={cardTwoIcon}
+                      cardContent={cardTwoContent}></SingleCard>
         </Grid>
         <Grid item xs={12} md={4}>
-          <SingleCard cardData={props.cardThree}></SingleCard>
+          <SingleCard iconImage={cardThreeIcon}
+                      cardContent={cardThreeContent}></SingleCard>
         </Grid>
 
       </Grid>

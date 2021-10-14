@@ -1,5 +1,6 @@
 import * as React from 'react';
 import Image from 'next/image'
+import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
@@ -12,17 +13,22 @@ import emailImage from '../public/images/email.svg'
 
 export default function SingleCard(props) {
   console.log("singleCard");
-  console.log({props});
+  // console.log({...props});
+
+  console.log(props.iconImage);
   return (
     <Card raised>
-      <Image src={props.cardData.icon.emailImage}
-             height="170em"
-             className={singleCardStyle.cardIcon}/>
+        <Box sx={{ pt: "20px" }}>
+          <Image src={props.iconImage}
+               height="120em"
+               width="120em"
+               className={singleCardStyle.cardIcon}/>
+        </Box>
       <CardContent className={singleCardStyle.cardText}>
-        <Typography variant="subtitle1"
-                    align="center"
+      <Typography variant="subtitle1"
+                    textAlign="center"
                     color="text.primary">
-          {props.cardData.content}
+          {props.cardContent}
         </Typography>
       </CardContent>
       <CardActions>

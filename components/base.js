@@ -2,7 +2,9 @@ import Head from 'next/head'
 import Image from 'next/image'
 import Link from 'next/link'
 import Container from '@mui/material/Container';
+import Box from '@mui/material/Box'
 import TopAppBar from './appbar.js'
+import BottomBar from './bottomBar.js'
 import baseStyles from '../css/base.module.css'
 import utilStyles from '../css/utils.module.css'
 import configData from '../config.json'
@@ -31,7 +33,7 @@ export default function BaseLayout({ children, home }) {
         <title>{configData.METADATA.WEBSITE_NAME}</title>
       </Head>
 
-      <TopAppBar></TopAppBar>
+      <TopAppBar isHome={home}></TopAppBar>
 
       <Container>
         <div className={baseStyles.pageContent}>
@@ -45,6 +47,9 @@ export default function BaseLayout({ children, home }) {
         )}
         </div>
       </Container>
+
+      <BottomBar></BottomBar>
+
       </>
   )
 }

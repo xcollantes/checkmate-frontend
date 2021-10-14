@@ -1,0 +1,65 @@
+[
+  {
+    "_id": 1,
+    "name": "Toyota",
+    "catagory": "Car",
+    "image": "toyota.jpeg",
+    "price": 15.99
+  },
+  {
+    "_id": 2,
+    "name": "BMW",
+    "catagory": "Car",
+    "image": "bmw.png",
+    "price": 250000
+  },
+  {
+    "_id": 3,
+    "name": "Jacket",
+    "catagory": "Clothes",
+    "image": "jacket.jpeg",
+    "price": 50.00
+  },
+  {
+    "_id": 4,
+    "name": "RTX 3080",
+    "catagory": "Computers",
+    "image": "rtx_3080.jpeg",
+    "price": 1000
+  },
+  {
+    "_id": 5,
+    "name": "AMD Ryzen",
+    "catagory": "Computers",
+    "image": "amd_ryzen_5.jpeg",
+    "price": 300
+  },
+  {
+    "_id": 6,
+    "name": "Intel",
+    "catagory": "Computers",
+    "image": "amd_ryzen_5.jpeg",
+    "price": 325
+  },
+  {
+    "_id": 7,
+    "name": "Keyboard",
+    "catagory": "Computers",
+    "image": "keyboard.jpeg",
+    "price": 300
+  },
+  {
+    "_id": 8,
+    "name": "Logitech webcam",
+    "catagory": "Computers",
+    "image": "brio.webp",
+    "price": 300
+  },
+  {
+    "_id": 9,
+    "name": "Xbox Series X",
+    "catagory": "Computers",
+    "image": "xbox_series_x.webp",
+    "price": 9999999999
+  }
+]
