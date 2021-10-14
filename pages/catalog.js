@@ -54,35 +54,26 @@ export default function Catalog(props) {
   }
 
   function handleSearchChange(event) {
-    let { value } = event.target
-    // setSelectedCatagories(catagory => (
-    //   catagory.map(item => item.name.toLowerCase().includes(value.toLowerCase()))
-    // ))
-    selectedCatagories.map(catagory => console.log(catagory))
-
+    let { textContent } = event.target
+    console.log(event)
+    setProductsShow(products.filter(product =>
+      product.name == textContent))
   }
 
   function catalogSearchBar() {
-    const productOptions = products.map(product => product.name).sort()
+    // const productOptions = products.map(product => product.name).sort()
 
     return (
       <Autocomplete
-          options={productOptions}
+          options={products}
           autoComplete
+          getOptionLabel={option => option.name}
+          onChange={event => handleSearchChange(event)}
+          groupBy={option => option.catagory}
+
           noOptionsText="No products found"
           renderInput={params => (
-            <TextField {...params}
-                       defaultValue=""
-                       label=""
-                       InputProps={{
-                         startAdornment: (
-                           <InputAdornment position="start">
-                             <SearchIcon />
-                           </InputAdornment>
-                         )
-                       }}
-                       onChange={event => handleSearchChange(event)}
-                       variant="outlined" />
+            <TextField {...params} label="" variant="outlined" />
           )}
         />
     )
