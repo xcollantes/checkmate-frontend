@@ -2,6 +2,7 @@ import { useRouter } from 'next/router'
 import Grid from '@mui/material/Grid'
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
+import Showcase from '../components/showcase'
 import SearchBar from '../components/searchBar'
 import BaseLayout from '../components/base'
 
@@ -12,25 +13,30 @@ export default function Product() {
   const router = useRouter()
   const { pid } = router.query
 
+  function buildLefthand() {
+    return (
+      <Box>
+      </Box>
+
+    )
+  }
+
+  function buildRighthand() {
+    return (
+      <Box>
+      </Box>
+
+    )
+  }
+
   return (
     <BaseLayout>
+
       <Box>
-      <Grid container justifyContent="space-evenly">
-
-        {/* Menu selector */}
-        <Grid item xs={12} md={3} sx={{ pb: "2.5rem", bgcolor: "yellow" }}>
-
-        </Grid>
-
-        <Grid item xs={12} md={9}>
-
-          <Box sx={{ flexGrow: 1 }}>
-            <Grid container spacing={3}>
-
-            </Grid>
-          </Box>
-        </Grid>
-      </Grid>
+        <Typography variant="h2">{pid}</Typography>
+      </Box>
+      <Box>
+        <Showcase lefthand={buildLefthand()}></Showcase>
       </Box>
     </BaseLayout>
   )
