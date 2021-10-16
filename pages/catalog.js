@@ -9,6 +9,7 @@ import TextField from '@mui/material/TextField'
 import Autocomplete from '@mui/material/Autocomplete'
 import InputAdornment from '@mui/material/InputAdornment'
 import SearchIcon from '@mui/icons-material/Search'
+import Showcase from '../components/showcase'
 import CatalogCard from '../components/catalogCard'
 import BaseLayout from '../components/base'
 import SearchBar from '../components/searchBar'
@@ -81,13 +82,14 @@ export default function Catalog(props) {
 
   function buildMenuItems(items) {
     return (
-      items.map(value =>
-        <FormControlLabel control={<Checkbox />}
-                          name={value.name}
-                          onChange={event => handleChangeMenu(event)}
-                          label={value.name}
-                          key={value.name} />
-      )
+      <FormGroup>
+        {items.map(value =>
+          <FormControlLabel control={<Checkbox />}
+                            name={value.name}
+                            onChange={event => handleChangeMenu(event)}
+                            label={value.name}
+                            key={value.name} />)}
+      </FormGroup>
     )
   }
 
@@ -110,25 +112,11 @@ export default function Catalog(props) {
       <Box sx={{ mt: "1rem" }}>
         {catalogSearchBar()}
       </Box>
-      <Box sx={{ mt: '1em', width: '100%' }}>
-        <Grid container justifyContent="space-evenly">
 
-          {/* Menu selector */}
-          <Grid item xs={12} md={3} sx={{ pb: "2.5rem" }}>
-            <FormGroup>
-              {buildMenuItems(menuItems)}
-            </FormGroup>
-          </Grid>
-
-          <Grid item xs={12} md={9}>
-
-            <Box sx={{ flexGrow: 1 }}>
-              <Grid container spacing={3}>
-                {buildCatalogGrid()}
-              </Grid>
-            </Box>
-          </Grid>
-        </Grid>
+      <Box>
+        <Showcase lefthand={buildMenuItems(menuItems)}
+          righthand={buildCatalogGrid()}>
+        </Showcase>
       </Box>
     </BaseLayout>
   )
