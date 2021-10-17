@@ -18,7 +18,7 @@ export default function Product() {
 
   console.log(router.query)
 
-  const productData = products.filter(product => product._id == pid)[0]
+  const productData = products.filter(product => product._id == pid)[0]  // Choose one result
   console.log(productData)
 
   let mockVersion = false
@@ -46,18 +46,18 @@ export default function Product() {
     <BaseLayout>
 
       {mockVersion &&
-        <Box>
+        <Box sx={{ mt: "1rem" }}>
           <Grid container justifyContent="space-evenly">
-            <Grid item>
+            <Grid item xs={12}>
               <Image src={"/../public/images/products/" + productData.image}
                      height="100px"
                      width="100px"/>
             </Grid>
-            <Grid item>
-              <Typography variant="h2"></Typography>
+            <Grid item xs={12} md={4}>
+              <Typography variant="h4">{productData.name}</Typography>
             </Grid>
-            <Grid item>
-              <Typography variant="h2"></Typography>
+            <Grid item xs={12} md={4}>
+              <Typography variant="body1">TODO: Details of the product here</Typography>
             </Grid>
           </Grid>
         </Box>
