@@ -5,7 +5,7 @@ import Grid from '@mui/material/Grid'
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
 import Showcase from '../components/showcase'
-import FloatingActionButtons from '../components/actionButton'
+import ProductActionButton from '../components/actionButtonProduct'
 import SearchBar from '../components/searchBar'
 import BaseLayout from '../components/base'
 
@@ -34,6 +34,8 @@ export default function Product() {
     )
   }
 
+
+
   function buildRighthand() {
     return (
       <Box>
@@ -46,18 +48,36 @@ export default function Product() {
     <BaseLayout>
 
       {mockVersion &&
-        <Box sx={{ mt: "1rem" }}>
-          <Grid container justifyContent="space-evenly">
+        <Box sx={{ mt: "2.5rem" }}>
+          <Grid container justifyContent="space-evenly" spacing={3}>
+            <Grid item xs={12} xs={6}>
+              <Box sx={{ position: "relative", height: "20rem"}}>
+                <Image src={"/../public/images/products/" + productData.image}
+                       layout="fill"
+                       objectFit="contain" />
+              </Box>
+            </Grid>
+            <Grid item xs={6}>
+              <Typography variant="body1">
+                TODO: Some number of sites and list of sites available
+              </Typography>
+            </Grid>
+
             <Grid item xs={12}>
-              <Image src={"/../public/images/products/" + productData.image}
-                     height="100px"
-                     width="100px"/>
+              <Typography variant="h5" textAlign="left">{productData.name}</Typography>
             </Grid>
-            <Grid item xs={12} md={4}>
-              <Typography variant="h4">{productData.name}</Typography>
+            <Grid item xs={12}>
+              <ProductActionButton productLink={productData.name} />
             </Grid>
-            <Grid item xs={12} md={4}>
-              <Typography variant="body1">TODO: Details of the product here</Typography>
+
+            <Grid item xs={12}>
+              <Typography variant="body1">
+                TYLER has one arm around Jack's shoulder; the other hand
+                holds a HANDGUN with the barrel lodged in JACK'S MOUTH.
+                Tyler is sitting in Jack's lap. They are both
+                sweating and disheveled, both around 30; Tyler
+                is blond, handsome; and Jack, brunette, is appealing in a
+                dry sort of way.  Tyler looks at his watch.</Typography>
             </Grid>
           </Grid>
         </Box>
