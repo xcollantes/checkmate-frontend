@@ -29,11 +29,12 @@ export default function ProductActionButton( {productLink} ) {
   }
 
   return (
-    <Box sx={{ '& > :not(style)': { m: 1 } }}>
+    <Box sx={{ '& > :not(style)': { m: 0 } }}>
       <Fab
         color="secondary"
         variant="extended"
         onClick={handleClick}
+        sx={{ mx: "0" }}
         component="a"
         size="medium">
         Alert me
