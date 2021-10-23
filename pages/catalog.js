@@ -100,7 +100,8 @@ export default function Catalog(props) {
                     <CatalogCard title={value.name}  // From Products
                                  body={value.price}
                                  image={"/../public/images/products/"
-                                   + value.image}>
+                                   + value.image}
+                                 productId={value._id}>
                     </CatalogCard>
                   </Grid>
                 )

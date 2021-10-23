@@ -12,88 +12,78 @@ import BaseLayout from '../components/base'
 import products from '../testdata/products.json'
 
 
+export async function getStaticProps(context) {
+  // No-op since getStaticPaths needs getStaticProps to be called.
+  return { props: {} }
+}
+
+export async function getStaticPaths() {
+  // Paths must be specified here.  User specified paths out of range
+  // will be directed to 404 error.
+  // https://stackoverflow.com/a/69684432/8278075 
+  const dynamicFiles = products.map(product => (
+    {
+      params: { pid: String(product._id) },  // Product IDs are ints in JSON file
+    }
+  ))
+
+  return {
+    paths: dynamicFiles,
+    fallback: false
+  }
+}
+
 export default function Product() {
   const router = useRouter()
   const { pid } = router.query
 
-  console.log(router.query)
-
   const productData = products.filter(product => product._id == pid)[0]  // Choose one result
-  console.log(productData)
 
-  let mockVersion = false
-  if (router.query.mock_version) {
-    mockVersion = true
-  }
-
-  function buildLefthand() {
-    return (
-      <Box>
-      </Box>
-
-    )
-  }
-
-
-
-  function buildRighthand() {
-    return (
-      <Box>
-      </Box>
-
-    )
+  const renderCartButton = false
+  if (router.query.cart_button) {
+    renderCartButton = true
   }
 
   return (
     <BaseLayout>
-
-      {mockVersion &&
-        <Box sx={{ mt: "2.5rem" }}>
-          <Grid container justifyContent="space-evenly" spacing={3}>
-            <Grid item xs={12} xs={6}>
-              <Box sx={{ position: "relative", height: "20rem"}}>
-                <Image src={"/../public/images/products/" + productData.image}
-                       layout="fill"
-                       objectFit="contain" />
-              </Box>
-            </Grid>
-            <Grid item xs={6}>
-              <Typography variant="body1">
-                TODO: Some number of sites and list of sites available
-              </Typography>
-            </Grid>
-
-            <Grid item xs={12}>
-              <Typography variant="h5" textAlign="left">{productData.name}</Typography>
-            </Grid>
-            <Grid item xs={12}>
-              <ProductActionButton productLink={productData.name} />
-            </Grid>
-
-            <Grid item xs={12}>
-              <Typography variant="body1">
-                TYLER has one arm around Jack's shoulder; the other hand
-                holds a HANDGUN with the barrel lodged in JACK'S MOUTH.
-                Tyler is sitting in Jack's lap. They are both
-                sweating and disheveled, both around 30; Tyler
-                is blond, handsome; and Jack, brunette, is appealing in a
-                dry sort of way.  Tyler looks at his watch.</Typography>
-            </Grid>
+      <Box sx={{ mt: "2.5rem" }}>
+        <Grid container justifyContent="space-evenly" spacing={3.5}>
+          <Grid item xs={12} xs={6}>
+            <Box sx={{ position: "relative", height: "20rem"}}>
+              <Image src={"/../public/images/products/" + productData.image}
+                     layout="fill"
+                     objectFit="contain" />
+            </Box>
           </Grid>
-        </Box>
-      }
+          <Grid item xs={6}>
+            <Typography variant="body1">
+              TODO: Some number of sites and list of sites available
+            </Typography>
+          </Grid>
 
-      {!mockVersion &&
-        <>
-        <Box>
-          <Typography variant="h2">{pid}</Typography>
-        </Box>
-        <Box>
-          <Showcase lefthand={buildLefthand()}></Showcase>
-        </Box>
-        </>
-      }
+          <Grid item xs={12}>
+            <Typography variant="h5" textAlign="left">{productData.name}</Typography>
+          </Grid>
+          <Grid item xs={12}>
+            {renderCartButton
+              ? <Button variant="outlined" size="small">
+                  <AddShoppingCartIcon fontSize="small" />Add
+                </Button>
+              : <ProductActionButton productLink={productData.name} />
+            }
+          </Grid>
 
+          <Grid item xs={12}>
+            <Typography variant="body1">
+              TYLER has one arm around Jack's shoulder; the other hand
+              holds a HANDGUN with the barrel lodged in JACK'S MOUTH.
+              Tyler is sitting in Jack's lap. They are both
+              sweating and disheveled, both around 30; Tyler
+              is blond, handsome; and Jack, brunette, is appealing in a
+              dry sort of way.  Tyler looks at his watch.</Typography>
+          </Grid>
+        </Grid>
+      </Box>
     </BaseLayout>
   )
 }
