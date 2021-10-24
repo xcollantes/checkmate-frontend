@@ -1,4 +1,6 @@
 import * as React from 'react'
+import { useRouter } from 'next/router'
+import Link from 'next/link'
 import Image from 'next/image'
 import Box from '@mui/material/Box'
 import Grid from '@mui/material/Grid'
@@ -15,9 +17,9 @@ export default function CatalogCard( product ) {
   let formattedPrice = "$" + product.body.toLocaleString(
     "en-US", {minimumFractionDigits: 2})  // TODO: Localize
 
+    console.log(product)
     return (
       <Card raised>
-
         <CardContent>
           <div style={{ height: "15rem", position: "relative" }}>
             <Image src={product.image} layout="fill" objectFit="contain" />
@@ -30,8 +32,9 @@ export default function CatalogCard( product ) {
           <Button variant="outlined" size="small">
             <AddShoppingCartIcon fontSize="small" />Add
           </Button>
-
-          <Button variant="text" size="small">Details</Button>
+          <Link href={"/" + product.productId}>
+            <Button variant="text" size="small">Details</Button>
+          </Link>
         </CardActions>
 
       </Card>
