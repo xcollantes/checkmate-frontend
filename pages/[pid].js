@@ -3,6 +3,8 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 import Grid from '@mui/material/Grid'
 import Box from '@mui/material/Box'
+import Button from '@mui/material/Button'
+import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import Typography from '@mui/material/Typography'
 import Showcase from '../components/showcase'
 import ProductActionButton from '../components/actionButtonProduct'
@@ -20,7 +22,7 @@ export async function getStaticProps(context) {
 export async function getStaticPaths() {
   // Paths must be specified here.  User specified paths out of range
   // will be directed to 404 error.
-  // https://stackoverflow.com/a/69684432/8278075 
+  // https://stackoverflow.com/a/69684432/8278075
   const dynamicFiles = products.map(product => (
     {
       params: { pid: String(product._id) },  // Product IDs are ints in JSON file
@@ -39,7 +41,7 @@ export default function Product() {
 
   const productData = products.filter(product => product._id == pid)[0]  // Choose one result
 
-  const renderCartButton = false
+  let renderCartButton = false
   if (router.query.cart_button) {
     renderCartButton = true
   }
@@ -66,7 +68,7 @@ export default function Product() {
           </Grid>
           <Grid item xs={12}>
             {renderCartButton
-              ? <Button variant="outlined" size="small">
+              ? <Button variant="outlined" color="secondary" size="small">
                   <AddShoppingCartIcon fontSize="small" />Add
                 </Button>
               : <ProductActionButton productLink={productData.name} />

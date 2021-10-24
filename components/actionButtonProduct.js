@@ -9,6 +9,7 @@ import IconButton from '@mui/material/IconButton'
 import Alert from '@mui/material/Alert'
 import CloseIcon from '@mui/icons-material/Close'
 import { useTheme } from '@mui/material/styles'
+import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart'
 import SnackbarPop from '../components/alerts'
 
 
@@ -37,7 +38,7 @@ export default function ProductActionButton( {productLink} ) {
         sx={{ mx: "0" }}
         component="a"
         size="medium">
-        Alert me
+        <AddShoppingCartIcon fontSize="small" sx={{ mr: "0.30rem" }}/>Add
       </Fab>
       <Snackbar
         open={open}
