@@ -3,7 +3,8 @@
 
 import React from 'react';
 import global from '../css/global.css'
-import { createTheme, ThemeProvider, styled } from '@mui/material/styles';
+import { AuthUserProvider } from '../context/AuthUserContext'
+import { createTheme, ThemeProvider, styled } from '@mui/material/styles'
 
 
 // Overrides default Material UI: https://mui.com/customization/default-theme
@@ -20,9 +21,11 @@ const theme = createTheme({
 
 export default function App({ Component, pageProps }) {
   return (
-    <ThemeProvider theme={theme}>
-      <Component {...pageProps} />
-    </ThemeProvider>
+    <AuthUserProvider>
+      <ThemeProvider theme={theme}>
+        <Component {...pageProps} />
+      </ThemeProvider>
+    </AuthUserProvider>
   )
 }
 
