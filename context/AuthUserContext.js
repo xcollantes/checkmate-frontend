@@ -1,14 +1,24 @@
 import { createContext, useContext, Context } from 'react'
-import useFirebaseAuth from '../lib/useFirebaseAuth';
+import { GoogleAuthProvider, getAuth, signInWithPopup } from "firebase/auth"
+import firebaseAuth from "../firebase"
 
-const authUserContext = createContext({
-  authUser: null,
-  loading: true
-});
 
-export function AuthUserProvider({ children }) {
-  const auth = useFirebaseAuth();
-  return <authUserContext.Provider value={auth}>{children}</authUserContext.Provider>;
+const provider = new GoogleAuthProvider()
+
+const login = () => {
+  signInWithPopup(firebaseAuth, provider).then(result => {
+    const cred = GoogleAuthProvider.credentialFromResult(result)
+    const token = cred.accessToken
+    const user = result.user
+    console.log("GOOGEL AUTH PROVIDER")
+    console.log({cred, token, user})
+  }).catch(e => {
+    const errorMessage = "Error with Google Authentication " + e.code + " " + e.message + " with email " + e.email + " " + GoogleAuthProvider.credentialFromError(e)
+    console.error(errorMessage)
+  })
 }
-// custom hook to use the authUserContext and access authUser and loading
-export const useAuth = () => useContext(authUserContext);
+
+const logout = () => {
+  firebaseAuth.signOut()
+  console.log("LOGOUT SUCCESSFUL")
+}
