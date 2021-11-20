@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
 import useRouter from 'next/router'
 import Box from '@mui/material/Box'
+import TextField from '@mui/material/TextField'
 import {
   GoogleAuthProvider,
   getAuth,
@@ -14,29 +15,31 @@ import firebaseAuth from "../../../firebase"
 
 
 export default function LoggedIn() {
-  const loggingWithEmail = (email, password) => {
-    signInWithEmailAndPassword(firebaseAuth, email, password).then(cred => {
-      const token = cred.accessToken
+  const auth = getAuth()
+  const loggingWithEmail = () => {
+    // const email = document.getElementById("user").value
+    // const password = document.getElementById("pass").value
+
+   signInWithEmailAndPassword(
+      auth, "collantes.xavier@gmail.com", "Password123").then(cred => {
+      // const token = cred.accessToken
       const user = cred.user
       console.log("GOOGEL AUTH PROVIDER")
-      console.log({cred, token, user})
+      console.log({cred, user})
     }).catch(e => {
-      const errorMessage = "Error with Google Authentication " + e.code + " " + e.message + " with email " + e.email + " " + GoogleAuthProvider.credentialFromError(e)
+      const errorMessage = "Error with login" + e.code + " " + e.message + " with email " + e.email
       console.error(errorMessage)
     })
   }
 
-  const logout = () => {
-    signOut(firebaseAuth)
-    console.log("LOGOUT SUCCESSFUL")
-  }
+  // const logout = () => {
+  //   signOut(firebaseAuth)
+  //   console.log("LOGOUT SUCCESSFUL")
+  // }
 
   return (
     <Box>
-      <input type="text" id="user"></input>
-      <input type="text" id="pass"></input>
-      <button onClick={loggingWithEmail("", "")}>LOG IN</button>
-      <button onClick={logout()}>LOG OUT</button>
+      <button onClick={loggingWithEmail}>LOG IN</button>
     </Box>
   )
 }

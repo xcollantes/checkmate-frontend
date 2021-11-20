@@ -3,7 +3,6 @@
 
 import React from 'react';
 import global from '../css/global.css'
-import { AuthUserProvider } from '../context/AuthUserContext'
 import { createTheme, ThemeProvider, styled } from '@mui/material/styles'
 
 
@@ -21,11 +20,11 @@ const theme = createTheme({
 
 export default function App({ Component, pageProps }) {
   return (
-    <AuthUserProvider>
+    
       <ThemeProvider theme={theme}>
         <Component {...pageProps} />
       </ThemeProvider>
-    </AuthUserProvider>
+
   )
 }
 

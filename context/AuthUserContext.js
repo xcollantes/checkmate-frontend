@@ -7,6 +7,7 @@ import {
 import firebaseAuth from "../firebase"
 
 class AuthUser {
+
   const loggingWithEmail = (email, password) => {
     signInWithEmailAndPassword(firebaseAuth, email, password).then(cred => {
       const token = cred.accessToken
