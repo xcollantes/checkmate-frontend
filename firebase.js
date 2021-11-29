@@ -1,5 +1,6 @@
 import { initializeApp, getApps } from 'firebase/app'
-import { getAuth } from 'firebase/auth'
+import { getAuth } 'firebase/auth'
+
 
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
@@ -12,6 +13,8 @@ const firebaseConfig = {
   measurementId: process.env.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID
 }
 
-const app = initializeApp(firebaseConfig)
+// Firebase v9.0.1+ does not need to be checked
 
-export default app
+const firebaseApp = initializeApp(firebaseConfig)
+
+export firebaseApp
