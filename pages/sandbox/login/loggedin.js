@@ -1,45 +1,49 @@
-import { useEffect } from 'react'
 import useRouter from 'next/router'
 import Box from '@mui/material/Box'
 import TextField from '@mui/material/TextField'
 import {
   GoogleAuthProvider,
+  FacebookAuthProvider,
+  TwitterAuthProvider,
+  GithubAuthProvider,
+  EmailAuthProvider,
+  PhoneAuthProvider,
+  onAuthStateChanged,
+  AnonymousAuthProvider,
   getAuth,
   signOut,
   signInWithPopup,
-  signInWithEmailAndPassword } from "firebase/auth"
-import firebaseAuth from "../../../firebase"
-
-// import { login, loggingWithEmail, logout } from '../../../context/AuthUserContext.js'
-// import SomePrint from '../../../context/AuthUserContext.js'
+  signInWithEmailAndPassword } from 'firebase/auth'
+import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth'
+import { firebaseApp } from '../../../firebaseApp'
 
 
 export default function LoggedIn() {
-  const auth = getAuth()
-  const loggingWithEmail = () => {
-    // const email = document.getElementById("user").value
-    // const password = document.getElementById("pass").value
-
-   signInWithEmailAndPassword(
-      auth, "collantes.xavier@gmail.com", "Password123").then(cred => {
-      // const token = cred.accessToken
-      const user = cred.user
-      console.log("GOOGEL AUTH PROVIDER")
-      console.log({cred, user})
-    }).catch(e => {
-      const errorMessage = "Error with login" + e.code + " " + e.message + " with email " + e.email
-      console.error(errorMessage)
-    })
+  let uiConfig = {
+    signInSuccessUrl: '/',
+    signInOptions: [
+      GoogleAuthProvider.PROVIDER_ID,
+      FacebookAuthProvider.PROVIDER_ID,
+      TwitterAuthProvider.PROVIDER_ID,
+      GithubAuthProvider.PROVIDER_ID,
+      EmailAuthProvider.PROVIDER_ID,
+      PhoneAuthProvider.PROVIDER_ID,
+    ],
+    // Terms of service url/callback.
+    tosUrl: '/',
+    // Privacy policy url/callback.
+    privacyPolicyUrl: '/'
   }
 
-  // const logout = () => {
-  //   signOut(firebaseAuth)
-  //   console.log("LOGOUT SUCCESSFUL")
-  // }
+  // Initialize the FirebaseUI Widget using Firebase.
+  // let ui = new firebaseuiNoSSR.auth.AuthUI(firebase.auth())
+  // The start method will wait until the DOM is loaded.
+  // ui.start('#firebaseui-auth-container', uiConfig)
 
   return (
     <Box>
-      <button onClick={loggingWithEmail}>LOG IN</button>
+      <h1>Why won't my stupid web app work, wait it works</h1>
+      <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={getAuth()} />
     </Box>
   )
 }
