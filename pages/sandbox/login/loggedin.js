@@ -10,24 +10,23 @@ import {
   PhoneAuthProvider,
   onAuthStateChanged,
   AnonymousAuthProvider,
-  getAuth,
   signOut,
   signInWithPopup,
   signInWithEmailAndPassword } from 'firebase/auth'
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth'
-import { firebaseApp } from '../../../firebaseApp'
+import { firebaseApp, firebaseAuth } from '../../../firebaseApp'
 
 
 export default function LoggedIn() {
   let uiConfig = {
-    signInSuccessUrl: '/',
+    signInSuccessUrl: '/sandbox/login/loggedin',
     signInOptions: [
       GoogleAuthProvider.PROVIDER_ID,
-      FacebookAuthProvider.PROVIDER_ID,
-      TwitterAuthProvider.PROVIDER_ID,
+      // FacebookAuthProvider.PROVIDER_ID,
+      // TwitterAuthProvider.PROVIDER_ID,
       GithubAuthProvider.PROVIDER_ID,
       EmailAuthProvider.PROVIDER_ID,
-      PhoneAuthProvider.PROVIDER_ID,
+      // PhoneAuthProvider.PROVIDER_ID,
     ],
     // Terms of service url/callback.
     tosUrl: '/',
@@ -43,7 +42,7 @@ export default function LoggedIn() {
   return (
     <Box>
       <h1>Why won't my stupid web app work, wait it works</h1>
-      <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={getAuth()} />
+      <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={firebaseAuth} />
     </Box>
   )
 }
