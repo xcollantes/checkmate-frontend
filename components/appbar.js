@@ -10,13 +10,15 @@ import utilStyles from '../css/utils.module.css'
 import configData from '../config.json'
 
 
-export default function TopAppBar({ isHome }) {
+export default function TopAppBar({ hideLogo, hideLogin }) {
+
+  console.log("HIDELOGIN: ", hideLogin)
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
         <Toolbar>
 
-          {!isHome && (
+          {!hideLogo && (
             <Link href="/">
                 <Typography variant="h6"
                             component="div"
@@ -26,12 +28,12 @@ export default function TopAppBar({ isHome }) {
                 </Typography>
             </Link>)
           }
-          {isHome && (
+          {hideLogo && (
             <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             </Typography>)
           }
 
-          <Button color="inherit">Login</Button>
+          {!hideLogin && <Button color="inherit"><Link href="/login"><a>Login</a></Link></Button>}
         </Toolbar>
       </AppBar>
     </Box>
