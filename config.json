@@ -4,6 +4,8 @@
     "WEBSITE_NAME": "Checkmate",
     "TAGLINE": "One subscription.  All your favorite stores.",
     "WEBSITE_DESCRIPTION": "Web app for automatic notifications when your product is in stock.",
+    "TERMS": "#terms",
+    "PRIVACY": "#privacy",
     "CONTACT_EMAIL": "@checkmate.edu",
     "WEBSITE_TAGS": "Stock, notifications, alert, products"
   },

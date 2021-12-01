@@ -15,7 +15,7 @@ import emailImage from '../public/images/email.svg'
 
 export default function Home() {
   return (
-    <BaseLayout home>
+    <BaseLayout hideLogo>
       <Box className={utilStyles.container}>
         <h1 className={utilStyles.headerLogo}>{configData.METADATA.WEBSITE_NAME}</h1>
         <p className={utilStyles.headingLg}>{configData.METADATA.TAGLINE}</p>
