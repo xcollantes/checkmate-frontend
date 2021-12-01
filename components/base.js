@@ -12,7 +12,7 @@ import configData from '../config.json'
 const name = 'Xavier'
 
 // Component meant to be included on all pages in Checkmate frontend.
-export default function BaseLayout({ children, home }) {
+export default function BaseLayout({ children, hideLogo, hideLogin }) {
   return (
       <>
       <Head>
@@ -33,12 +33,12 @@ export default function BaseLayout({ children, home }) {
         <title>{configData.METADATA.WEBSITE_NAME}</title>
       </Head>
 
-      <TopAppBar isHome={home}></TopAppBar>
+      <TopAppBar hideLogo={hideLogo} hideLogin={hideLogin}></TopAppBar>
 
       <Container>
         <div className={baseStyles.pageContent}>
         {children}
-        {!home && (
+        {hideLogo && (
           <div className={baseStyles.backToHome}>
             <Link href="/">
               <a>← Back to home</a>
