@@ -26,7 +26,7 @@ export default function Login() {
       EmailAuthProvider.PROVIDER_ID,
       PhoneAuthProvider.PROVIDER_ID
     ],
-    signInSuccessUrl: '#my_account',
+    signInSuccessUrl: '/account',
     tosUrl: configData.TERMS,
     privacyPolicyUrl: configData.PRIVACY
   }
