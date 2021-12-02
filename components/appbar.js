@@ -10,34 +10,36 @@ import utilStyles from '../css/utils.module.css'
 import configData from '../config.json'
 
 
-export default function TopAppBar({ hideLogo, hideLogin }) {
+export default function TopAppBar({ hideLogo, hideLogin, userAccount }) {
+  console.log("USER ACCOUNT: ", userAccount)
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
         <Toolbar>
-
-          {!hideLogo && (
-            <Link href="/">
+          {hideLogo
+            ? <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+              </Typography>
+            : <Link href="/">
                 <Typography variant="h6"
                             component="div"
                             sx={{ flexGrow: 1 }}
                             className={utilStyles.headerLogoAppBar}>
                   Checkmate
                 </Typography>
-            </Link>)
-          }
-          {hideLogo && (
-            <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            </Typography>)
+              </Link>
           }
 
-          {!hideLogin && (
-            <Link href="/login">
-              <Button style={{ backgroundColor: "transparent" }}
-                      color="inherit">
-                Login
+          {userAccount
+            ? <Button style={{ backgroundColor: "transparent" }}
+                    color="inherit">
+                Logout
               </Button>
-            </Link>)
+            : <Link href="/login">
+                <Button style={{ backgroundColor: "transparent" }}
+                        color="inherit">
+                  Login
+                </Button>
+              </Link>
           }
         </Toolbar>
       </AppBar>
