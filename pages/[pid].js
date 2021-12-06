@@ -6,9 +6,7 @@ import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import Typography from '@mui/material/Typography'
-import Showcase from '../components/showcase'
 import ProductActionButton from '../components/actionButtonProduct'
-import SearchBar from '../components/searchBar'
 import BaseLayout from '../components/base'
 
 import products from '../testdata/products.json'
