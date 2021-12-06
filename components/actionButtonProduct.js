@@ -1,4 +1,3 @@
-import * as React from 'react'
 import { useState } from 'react'
 import Link from 'next/link'
 import Box from '@mui/material/Box'
@@ -10,7 +9,6 @@ import Alert from '@mui/material/Alert'
 import CloseIcon from '@mui/icons-material/Close'
 import { useTheme } from '@mui/material/styles'
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart'
-import SnackbarPop from '../components/alerts'
 
 
 /** Call to action to add alert to purchase. */

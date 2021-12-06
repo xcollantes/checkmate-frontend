@@ -9,9 +9,7 @@ import baseStyles from '../css/base.module.css'
 import utilStyles from '../css/utils.module.css'
 import configData from '../config.json'
 
-const name = 'Xavier'
 
-// Component meant to be included on all pages in Checkmate frontend.
 export default function BaseLayout({ children, hideLogo, hideLogin, userAccount }) {
   return (
       <>

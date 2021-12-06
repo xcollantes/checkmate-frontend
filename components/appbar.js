@@ -7,12 +7,14 @@ import Button from '@mui/material/Button'
 import IconButton from '@mui/material/IconButton'
 import MenuIcon from '@mui/icons-material/Menu'
 import { signOut } from 'firebase/auth'
+import { useUserContext } from '../contexts/user'
 import utilStyles from '../css/utils.module.css'
 import { firebaseAuth } from '../firebaseApp'
 import configData from '../config.json'
 
 
 export default function TopAppBar({ hideLogo, hideLogin, userAccount }) {
+  const user = useUserContext()
   const logoPlaceholder = <Typography variant="h6"
                                       component="div" sx={{ flexGrow: 1 }}>
                           </Typography>
@@ -36,11 +38,11 @@ export default function TopAppBar({ hideLogo, hideLogin, userAccount }) {
   const logoutFeature = <Button style={{ backgroundColor: "transparent" }}
                             color="inherit"
                             onClick={() => signOut(firebaseAuth)}>
-                          Logout
+                          Logout {user && user.displayName}
                         </Button>
 
   const topRightBar = () => {
-    if (userAccount) {
+    if (user) {
       return logoutFeature
     }
     else if (hideLogin) {
