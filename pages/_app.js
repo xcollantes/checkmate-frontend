@@ -1,30 +1,36 @@
 // This is where global vars is kept.
 // https://nextjs.org/learn/basics/assets-metadata-css/global-styles
 
-import React from 'react';
+import { useState, useEffect } from 'react'
+import { useRouter } from 'next/router'
+import Image from 'next/image'
 import global from '../css/global.css'
-import { createTheme, ThemeProvider, styled } from '@mui/material/styles'
+import { createTheme, ThemeProvider } from '@mui/material/styles'
+import { useAuthState } from 'react-firebase-hooks/auth'
+import { firebaseApp, firebaseAuth } from '../firebaseApp'
+import { UserContext, useUserContext } from '../contexts/user'
 
 
 // Overrides default Material UI: https://mui.com/customization/default-theme
-const theme = createTheme({
-  // palette: {
-  //   primary: {
-  //     main: "#001e3c"
-  //   },
-  //   secondary: {
-  //     main: "#ffa500"
-  //   }
-  // }
-});
+const theme = createTheme({})
 
 export default function App({ Component, pageProps }) {
+  // const [currentUser, setCurrentUser] = useState()
+  const route = useRouter()
+  const [user, loading, error] = useAuthState(firebaseAuth)
+
+  if (pageProps.protected && loading) {
+    return <Image width="400%" height="400%" src="/../public/images/bongo-cat.gif" />
+  } else if (pageProps.protected && !user) {
+    route.push("/login")
+  }
+
   return (
-    
+    <UserContext.Provider value={user}>
       <ThemeProvider theme={theme}>
         <Component {...pageProps} />
       </ThemeProvider>
-
+    </UserContext.Provider>
   )
 }
 

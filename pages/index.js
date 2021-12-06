@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import Box from '@mui/material/Box';
+import Box from '@mui/material/Box'
 import Fab from '@mui/material/Fab'
 import Typography from '@mui/material/Typography'
 import TripleCard from '../components/tripleCard'

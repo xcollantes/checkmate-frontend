@@ -1,5 +1,4 @@
-import Grid from '@mui/material/Grid'
-import Box from '@mui/material/Box'
+import { useRouter } from 'next/router'
 import {
   GoogleAuthProvider,
   FacebookAuthProvider,
@@ -7,35 +6,52 @@ import {
   GithubAuthProvider,
   EmailAuthProvider,
   PhoneAuthProvider,
-  AnonymousAuthProvider,
-  signOut,
-  signInWithPopup } from 'firebase/auth'
+  AnonymousAuthProvider } from 'firebase/auth'
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth'
-import BaseLayout from '../components/base'
-import { firebaseApp, firebaseAuth } from '../firebaseApp'
+import Box from '@mui/material/Box'
+import Typography from '@mui/material/Typography'
+import { firebaseAuth } from '../firebaseApp'
+import { useUserContext } from '../contexts/user'
 import configData from '../config.json'
+import BaseLayout from '../components/base'
 
 
 export default function Login() {
+  const user = useUserContext()
+  const router = useRouter()
   const uiConfig = {
     signInOptions: [
       GoogleAuthProvider.PROVIDER_ID,
-      FacebookAuthProvider.PROVIDER_ID,
-      TwitterAuthProvider.PROVIDER_ID,
+      // FacebookAuthProvider.PROVIDER_ID,
+      // TwitterAuthProvider.PROVIDER_ID,
       GithubAuthProvider.PROVIDER_ID,
       EmailAuthProvider.PROVIDER_ID,
-      PhoneAuthProvider.PROVIDER_ID
+      // PhoneAuthProvider.PROVIDER_ID
     ],
-    signInSuccessUrl: '#my_account',
+    signInSuccessUrl: "/account",
     tosUrl: configData.TERMS,
     privacyPolicyUrl: configData.PRIVACY
   }
 
+  if (user) {
+    router.push("/account")
+  }
+
+  let byeMsg = false
+  if (router.query.comebacksoon == ":D") {
+    byeMsg = true
+  }
+
   return (
-    <BaseLayout hideLogin>
-      <Box sx={{ mt: '3rem' }}>
-        <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={firebaseAuth} />
-      </Box>
-    </BaseLayout>
+    <>
+    {!user &&
+      <BaseLayout hideLogin>
+        <Box sx={{ mt: '3rem' }}>
+          {byeMsg && <Typography variant="h4">Thank you, please come again!</Typography>}
+          <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={firebaseAuth} />
+          </Box>
+      </BaseLayout>
+    }
+    </>
   )
 }
