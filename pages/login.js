@@ -20,11 +20,11 @@ export default function Login() {
   const uiConfig = {
     signInOptions: [
       GoogleAuthProvider.PROVIDER_ID,
-      FacebookAuthProvider.PROVIDER_ID,
-      TwitterAuthProvider.PROVIDER_ID,
+      // FacebookAuthProvider.PROVIDER_ID,
+      // TwitterAuthProvider.PROVIDER_ID,
       GithubAuthProvider.PROVIDER_ID,
       EmailAuthProvider.PROVIDER_ID,
-      PhoneAuthProvider.PROVIDER_ID
+      // PhoneAuthProvider.PROVIDER_ID
     ],
     signInSuccessUrl: '/account',
     tosUrl: configData.TERMS,
