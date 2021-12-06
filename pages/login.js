@@ -18,6 +18,7 @@ import BaseLayout from '../components/base'
 
 export default function Login() {
   const user = useUserContext()
+  const router = useRouter()
   const uiConfig = {
     signInOptions: [
       GoogleAuthProvider.PROVIDER_ID,
@@ -27,14 +28,18 @@ export default function Login() {
       EmailAuthProvider.PROVIDER_ID,
       // PhoneAuthProvider.PROVIDER_ID
     ],
-    signInSuccessUrl: '/account',
+    signInSuccessUrl: "/account",
     tosUrl: configData.TERMS,
     privacyPolicyUrl: configData.PRIVACY
   }
 
   if (user) {
-    const router = useRouter()
     router.push("/account")
+  }
+
+  let byeMsg = false
+  if (router.query.comebacksoon == ":D") {
+    byeMsg = true
   }
 
   return (
@@ -42,6 +47,7 @@ export default function Login() {
     {!user &&
       <BaseLayout hideLogin>
         <Box sx={{ mt: '3rem' }}>
+          {byeMsg && <Typography variant="h4">Thank you, please come again!</Typography>}
           <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={firebaseAuth} />
           </Box>
       </BaseLayout>
