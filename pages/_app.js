@@ -19,10 +19,6 @@ export default function App({ Component, pageProps }) {
   const route = useRouter()
   const [user, loading, error] = useAuthState(firebaseAuth)
 
-  // Specify `?debug_info=true` for info at bottom of page
-  let urlParamDebug = route.query.deb
-  let debugInfo = true ? urlParamDebug === "true" : false
-
   if (pageProps.protected && loading) {
     return <Image width="400%" height="400%" src="/../public/images/bongo-cat.gif" />
   } else if (pageProps.protected && !user) {
