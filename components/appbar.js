@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 import AppBar from '@mui/material/AppBar'
 import Box from '@mui/material/Box'
 import Toolbar from '@mui/material/Toolbar'
@@ -15,6 +16,11 @@ import configData from '../config.json'
 
 export default function TopAppBar({ hideLogo, hideLogin, userAccount }) {
   const user = useUserContext()
+  const router = useRouter()
+  function signOutUser() {
+    signOut(firebaseAuth)
+    router.push("/login?comebacksoon=:D")
+  }
   const logoPlaceholder = <Typography variant="h6"
                                       component="div" sx={{ flexGrow: 1 }}>
                           </Typography>
@@ -37,7 +43,7 @@ export default function TopAppBar({ hideLogo, hideLogin, userAccount }) {
 
   const logoutFeature = <Button style={{ backgroundColor: "transparent" }}
                             color="inherit"
-                            onClick={() => signOut(firebaseAuth)}>
+                            onClick={() => signOutUser()}>
                           Logout {user && user.displayName}
                         </Button>
 

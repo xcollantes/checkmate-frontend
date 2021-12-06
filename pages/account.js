@@ -1,4 +1,3 @@
-import { useRouter } from 'next/router'
 import Image from 'next/image'
 import Link from 'next/link'
 import Box from '@mui/material/Box'
