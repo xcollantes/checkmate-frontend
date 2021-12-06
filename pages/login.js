@@ -1,5 +1,4 @@
-import Grid from '@mui/material/Grid'
-import Box from '@mui/material/Box'
+import { useRouter } from 'next/router'
 import {
   GoogleAuthProvider,
   FacebookAuthProvider,
@@ -7,16 +6,18 @@ import {
   GithubAuthProvider,
   EmailAuthProvider,
   PhoneAuthProvider,
-  AnonymousAuthProvider,
-  signOut,
-  signInWithPopup } from 'firebase/auth'
+  AnonymousAuthProvider } from 'firebase/auth'
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth'
-import BaseLayout from '../components/base'
-import { firebaseApp, firebaseAuth } from '../firebaseApp'
+import Box from '@mui/material/Box'
+import Typography from '@mui/material/Typography'
+import { firebaseAuth } from '../firebaseApp'
+import { useUserContext } from '../contexts/user'
 import configData from '../config.json'
+import BaseLayout from '../components/base'
 
 
 export default function Login() {
+  const user = useUserContext()
   const uiConfig = {
     signInOptions: [
       GoogleAuthProvider.PROVIDER_ID,
@@ -31,11 +32,20 @@ export default function Login() {
     privacyPolicyUrl: configData.PRIVACY
   }
 
+  if (user) {
+    const router = useRouter()
+    router.push("/account")
+  }
+
   return (
-    <BaseLayout hideLogin>
-      <Box sx={{ mt: '3rem' }}>
-        <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={firebaseAuth} />
-      </Box>
-    </BaseLayout>
+    <>
+    {!user &&
+      <BaseLayout hideLogin>
+        <Box sx={{ mt: '3rem' }}>
+          <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={firebaseAuth} />
+          </Box>
+      </BaseLayout>
+    }
+    </>
   )
 }
