@@ -1,15 +1,5 @@
 # Front end site for Checkmate sample tutorial project 
 
-
-   
-<p align="center">
-  <a href="https://nextjs.org">
-    <img src="https://ideas.byteridge.com/content/images/size/w2000/2020/08/nextjs-image.jpeg" height="200">
-    <h1 align="center">Next.Js</h1>
-  </a>
-</p>
-
- 
 <p align="center">
   <a href="https://nextjs.org/">
     <img src="https://img.shields.io/badge/next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white">
