@@ -32,6 +32,10 @@ Settings for web app such as website name, home page taglines, links to terms, l
 
 ## Common pitfalls
 
+**Fonts don't work**
+
+Use <https://fontsource.org/fonts/carter-one> for importing font.  
+
 ### Optimizations
 
 Use NextJS's `Image` tag as opposed to the `img` tag.  `Image` will automatically image reponsive and load the image only when in the viewport.

@@ -12,7 +12,7 @@ import configData from '../config.json'
 
 export default function BaseLayout({ children, hideLogo, hideLogin, userAccount }) {
   return (
-      <>
+    <>
       <Head>
         <link rel="icon" href="/favicon.ico" />
         <meta
@@ -32,24 +32,24 @@ export default function BaseLayout({ children, hideLogo, hideLogin, userAccount 
       </Head>
 
       <TopAppBar hideLogo={hideLogo}
-                 hideLogin={hideLogin}
-                 userAccount={userAccount}></TopAppBar>
+        hideLogin={hideLogin}
+        userAccount={userAccount}></TopAppBar>
 
       <Container>
         <div className={baseStyles.pageContent}>
-        {children}
-        {hideLogo && (
-          <div className={baseStyles.backToHome}>
-            <Link href="/">
-              <a>← Back to home</a>
-            </Link>
-          </div>
-        )}
+          {children}
+          {hideLogo && (
+            <div className={baseStyles.backToHome}>
+              <Link href="/">
+                <a>← Back to home</a>
+              </Link>
+            </div>
+          )}
         </div>
       </Container>
 
       <BottomBar></BottomBar>
 
-      </>
+    </>
   )
 }
