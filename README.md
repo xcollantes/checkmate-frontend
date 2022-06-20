@@ -1,4 +1,4 @@
-# Front end site for Checkmate sample tutorial project 
+# Front end site for Checkmate sample tutorial project
 
 <p align="center">
   <a href="https://nextjs.org/">
@@ -19,19 +19,24 @@
   
 </p>
 
-## Getting started 
+## Getting started
+
 TODO
 
-## Configs 
+## Configs
 
-### .env.local 
-Global variables for web app. 
+### .env.local
+
+Global variables for web app.
 
 ### firebaseApp.js
+
 Firebase specific credentials.  
 
 ### config.json
+
 Settings for web app such as website name, home page taglines, links to terms, links to privacy statement, and color scheme.  
 
-## Credits 
+## Credits
+
 This is a starter template for [Learn Next.js](https://nextjs.org/learn).
