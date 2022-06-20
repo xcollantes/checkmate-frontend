@@ -1,7 +1,6 @@
 // This is where global vars is kept.
 // https://nextjs.org/learn/basics/assets-metadata-css/global-styles
 
-import { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import Image from 'next/image'
 import global from '../css/global.css'

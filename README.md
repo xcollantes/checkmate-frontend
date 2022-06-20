@@ -1,4 +1,4 @@
-# Front end site for Checkmate sample tutorial project
+# Front-end web application for Checkmate sample tutorial project
 
 <p align="center">
   <a href="https://nextjs.org/">
@@ -16,27 +16,26 @@
   <a aria-label="NPM version" href="https://www.npmjs.com/">
     <img alt="" src="https://img.shields.io/badge/npm-CB3837?style=for-the-badge&logo=npm&logoColor=white">
   </a>
-  
 </p>
 
 ## Getting started
 
-TODO
-
-## Configs
-
 ### .env.local
 
-Global variables for web app.
-
-### firebaseApp.js
-
-Firebase specific credentials.  
+Global variables for web app.  In production, this can be replaced with ENV vars.
 
 ### config.json
 
-Settings for web app such as website name, home page taglines, links to terms, links to privacy statement, and color scheme.  
+Settings for web app such as website name, home page taglines, links to terms, links to privacy statement, and color scheme.  Acts as global variables for application.  
 
-## Credits
+###
 
-This is a starter template for [Learn Next.js](https://nextjs.org/learn).
+## Common pitfalls
+
+### Optimizations
+
+Use NextJS's `Image` tag as opposed to the `img` tag.  `Image` will automatically image reponsive and load the image only when in the viewport.
+
+`getStaticPaths` needs to be used for dynamic pages such as `[id].js`.  
+
+``
