@@ -25,9 +25,9 @@ export default function Catalog(props) {
     let { name, checked } = event.target
     // https://stackoverflow.com/a/69446324/8278075
     const newSelectedCatagories = selectedCatagories.map(item => item.name == name ? {
-        ...item,
-        menuSelect: checked
-      } : item
+      ...item,
+      menuSelect: checked
+    } : item
     )
 
     // If catagory is selected, then push onto an array
@@ -64,17 +64,17 @@ export default function Catalog(props) {
 
     return (
       <Autocomplete
-          options={products}
-          autoComplete
-          getOptionLabel={option => option.name}
-          onChange={event => handleSearchChange(event)}
-          groupBy={option => option.catagory}
+        options={products}
+        autoComplete
+        getOptionLabel={option => option.name}
+        onChange={event => handleSearchChange(event)}
+        groupBy={option => option.catagory}
 
-          noOptionsText="No products found"
-          renderInput={params => (
-            <TextField {...params} label="" variant="outlined" />
-          )}
-        />
+        noOptionsText="No products found"
+        renderInput={params => (
+          <TextField {...params} label="" variant="outlined" />
+        )}
+      />
     )
   }
 
@@ -83,10 +83,10 @@ export default function Catalog(props) {
       <FormGroup>
         {items.map(value =>
           <FormControlLabel control={<Checkbox />}
-                            name={value.name}
-                            onChange={event => handleChangeMenu(event)}
-                            label={value.name}
-                            key={value.name} />)}
+            name={value.name}
+            onChange={event => handleChangeMenu(event)}
+            label={value.name}
+            key={value.name} />)}
       </FormGroup>
     )
   }
@@ -94,20 +94,20 @@ export default function Catalog(props) {
   function buildCatalogGrid() {
     return (
       productsShow.map(value =>
-                  <Grid item xs={12} sm={6} md={4} key={value.name}>
-                    <CatalogCard title={value.name}  // From Products
-                                 body={value.price}
-                                 image={"/../public/images/products/"
-                                   + value.image}
-                                 productId={value._id}>
-                    </CatalogCard>
-                  </Grid>
-                )
+        <Grid item xs={12} sm={6} md={4} key={value.name}>
+          <CatalogCard title={value.name}  // From Products
+            body={value.price}
+            image={"/../public/images/products/"
+              + value.image}
+            productId={value._id}>
+          </CatalogCard>
+        </Grid>
+      )
     )
   }
 
   return (
-    <BaseLayout catalog>
+    <BaseLayout>
       <Box sx={{ mt: "1rem" }}>
         {catalogSearchBar()}
       </Box>
