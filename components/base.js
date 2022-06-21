@@ -1,11 +1,8 @@
 import Head from 'next/head'
-import Image from 'next/image'
 import Link from 'next/link'
 import Container from '@mui/material/Container'
-import Box from '@mui/material/Box'
 import TopAppBar from './appbar.js'
 import BottomBar from './bottomBar.js'
-import baseStyles from '../css/base.module.css'
 import utilStyles from '../css/utils.module.css'
 import configData from '../config.json'
 
@@ -36,16 +33,12 @@ export default function BaseLayout({ children, hideLogo, hideLogin, userAccount 
         userAccount={userAccount}></TopAppBar>
 
       <Container>
-        <div className={baseStyles.pageContent}>
-          {children}
-          {hideLogo && (
-            <div className={baseStyles.backToHome}>
-              <Link href="/">
-                <a>← Back to home</a>
-              </Link>
-            </div>
-          )}
-        </div>
+        {children}
+        {hideLogo && (
+          <Link href="/">
+            <a>← Back to home</a>
+          </Link>
+        )}
       </Container>
 
       <BottomBar></BottomBar>

@@ -4,6 +4,7 @@ import Box from '@mui/material/Box'
 import Fab from '@mui/material/Fab'
 import '@fontsource/carter-one'
 import Typography from '@mui/material/Typography'
+import utilStyles from '../css/utils.module.css'
 import { useAuthState } from 'react-firebase-hooks/auth'
 import { firebaseAuth } from '../firebaseApp'
 import { useUserContext } from '../contexts/user'
@@ -22,11 +23,12 @@ export default function UserAccount() {
   return (
     <>
       {user &&
-        <BaseLayout userAccount>
+        <BaseLayout>
           <Box sx={{ mt: "3rem" }}>
             <Typography variant="h2">
               Welcome {user.displayName}!
             </Typography>
+            <div className={utilStyles.subheaderLogo}>{user.email}</div>
           </Box>
         </BaseLayout>
       }
