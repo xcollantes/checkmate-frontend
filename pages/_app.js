@@ -9,10 +9,15 @@ import '@fontsource/carter-one'
 import { useAuthState } from 'react-firebase-hooks/auth'
 import { firebaseApp, firebaseAuth } from '../firebaseApp'
 import { UserContext, useUserContext } from '../contexts/user'
-
+import { CssBaseline } from '@mui/material'
 
 // Overrides default Material UI: https://mui.com/customization/default-theme
-const theme = createTheme({})
+const theme = createTheme({
+  typography: {
+    fontFamily: [
+      '-apple-system', 'BlinkMacSystemFont', '"Segoe UI"', 'Roboto', 'Oxygen',].join(',')
+  }
+})
 
 export default function App({ Component, pageProps }) {
   // const [currentUser, setCurrentUser] = useState()
@@ -26,11 +31,12 @@ export default function App({ Component, pageProps }) {
   }
 
   return (
-    <UserContext.Provider value={user}>
-      <ThemeProvider theme={theme}>
+    <ThemeProvider theme={theme}>
+      <UserContext.Provider value={user}>
+        <CssBaseline />
         <Component {...pageProps} />
-      </ThemeProvider>
-    </UserContext.Provider>
+      </UserContext.Provider>
+    </ThemeProvider >
   )
 }
 
