@@ -3,19 +3,23 @@
 
 import { useRouter } from 'next/router'
 import Image from 'next/image'
-import global from '../css/global.css'
-import { createTheme, ThemeProvider } from '@mui/material/styles'
+import { createTheme, ThemeProvider, StyledEngineProvider } from '@mui/material/styles'
 import '@fontsource/carter-one'
+import '@fontsource/roboto'
 import { useAuthState } from 'react-firebase-hooks/auth'
 import { firebaseApp, firebaseAuth } from '../firebaseApp'
 import { UserContext, useUserContext } from '../contexts/user'
-import { CssBaseline } from '@mui/material'
+
+import Head from 'next/head'
+import TopAppBar from '../components/appbar'
+import BottomBar from '../components/bottomBar'
+import configData from '../config.json'
 
 // Overrides default Material UI: https://mui.com/customization/default-theme
 const theme = createTheme({
   typography: {
     fontFamily: [
-      '-apple-system', 'BlinkMacSystemFont', '"Segoe UI"', 'Roboto', 'Oxygen',].join(',')
+      '-apple-system', 'BlinkMacSystemFont', '"Open Sans"', 'Roboto', 'Oxygen',].join(',')
   }
 })
 
@@ -31,12 +35,38 @@ export default function App({ Component, pageProps }) {
   }
 
   return (
-    <ThemeProvider theme={theme}>
+    <>
+      <Head>
+        <link rel="icon" href="/favicon.ico" />
+        <meta
+          name="description"
+          content="{configData.METADATA.WEBSITE_DESCRIPTION}"
+        />
+        <meta
+          property="og:image"
+          content={`https://og-image.vercel.app/${encodeURI(
+            configData.METADATA.WEBSITE_NAME
+          )}.png?theme=light&md=0&fontSize=75px&images=https%3A%2F%2Fassets.vercel.com%2Fimage%2Fupload%2Ffront%2Fassets%2Fdesign%2Fnextjs-black-logo.svg`}
+        />
+        <meta name="keywords" content={configData.METADATA.WEBSITE_TAGS} />
+        <meta name="og:title" content={configData.METADATA.WEBSITE_NAME} />
+        <meta name="twitter:card" content="summary_large_image" />
+        <title>{configData.METADATA.WEBSITE_NAME}</title>
+      </Head>
+      {/* <ThemeProvider theme={theme}> */}
       <UserContext.Provider value={user}>
-        <CssBaseline />
+
+        <TopAppBar hideLogo={pageProps.hideLogo}
+          hideLogin={pageProps.hideLogin}></TopAppBar>
+
         <Component {...pageProps} />
+
+        <BottomBar></BottomBar>
+
       </UserContext.Provider>
-    </ThemeProvider >
+      {/* </ThemeProvider> */}
+    </>
+
   )
 }
 

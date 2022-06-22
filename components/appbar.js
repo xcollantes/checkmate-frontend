@@ -60,13 +60,12 @@ export default function TopAppBar({ hideLogo, hideLogin, userAccount }) {
   }
 
   return (
-    <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static">
-        <Toolbar>
-          {hideLogo ? logoPlaceholder : logoFeature}
-          {topRightBar()}
-        </Toolbar>
-      </AppBar>
-    </Box>
+    <AppBar position="static">
+      <Toolbar>
+        {hideLogo ? logoPlaceholder : logoFeature}
+        {topRightBar()}
+      </Toolbar>
+    </AppBar>
+
   )
 }

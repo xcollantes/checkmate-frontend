@@ -23,14 +23,12 @@ export default function UserAccount() {
   return (
     <>
       {user &&
-        <BaseLayout>
-          <Box sx={{ mt: "3rem" }}>
-            <Typography variant="h2">
-              Welcome {user.displayName}!
-            </Typography>
-            <div className={utilStyles.subheaderLogo}>{user.email}</div>
-          </Box>
-        </BaseLayout>
+        <Box sx={{ mt: "3rem" }}>
+          <Typography variant="h2">
+            Welcome{user.displayName && ' ' + user.displayName}!
+          </Typography>
+          <div className={utilStyles.subheaderLogo}>{user.email}</div>
+        </Box>
       }
     </>
   )

@@ -107,7 +107,7 @@ export default function Catalog(props) {
   }
 
   return (
-    <BaseLayout>
+    <>
       <Box sx={{ mt: "1rem" }}>
         {catalogSearchBar()}
       </Box>
@@ -117,6 +117,6 @@ export default function Catalog(props) {
           righthand={buildCatalogGrid()}>
         </Showcase>
       </Box>
-    </BaseLayout>
+    </>
   )
 }
