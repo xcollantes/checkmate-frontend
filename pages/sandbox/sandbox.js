@@ -77,7 +77,6 @@ export default function Sandbox() {
 // import Checkbox from '@mui/material/Checkbox'
 // import TextField from '@mui/material/TextField'
 // import Autocomplete from '@mui/material/Autocomplete'
-// import BaseLayout from '../../components/base'
 // import catalogStyles from '../../css/catalog.module.css'
 //
 // import menuItems from '../../testdata/menuItems.json'

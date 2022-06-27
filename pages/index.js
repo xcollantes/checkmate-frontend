@@ -1,10 +1,9 @@
+import * as React from 'react';
 import Image from 'next/image'
 import Link from 'next/link'
 import Box from '@mui/material/Box'
 import Fab from '@mui/material/Fab'
-import Typography from '@mui/material/Typography'
 import TripleCard from '../components/tripleCard'
-import BaseLayout from '../components/base'
 import utilStyles from '../css/utils.module.css'
 import configData from '../config.json'
 import bigOneImage from '../public/images/1.png'
@@ -18,8 +17,7 @@ export async function getStaticProps(context) {
   }
 }
 
-export default function Home(someProp) {
-  console.log("SOMEPROP ", someProp)
+export default function Home() {
   return (
     <>
       <Box className={utilStyles.container}>

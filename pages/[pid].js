@@ -7,10 +7,8 @@ import Button from '@mui/material/Button'
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import Typography from '@mui/material/Typography'
 import ProductActionButton from '../components/actionButtonProduct'
-import BaseLayout from '../components/base'
 
 import products from '../testdata/products.json'
-
 
 export async function getStaticProps(context) {
   // No-op since getStaticPaths needs getStaticProps to be called.

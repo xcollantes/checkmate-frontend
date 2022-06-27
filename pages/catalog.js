@@ -1,21 +1,16 @@
 import { useState } from 'react'
 import Grid from '@mui/material/Grid'
 import Box from '@mui/material/Box'
-import Typography from '@mui/material/Typography'
 import FormGroup from '@mui/material/FormGroup'
 import FormControlLabel from '@mui/material/FormControlLabel'
 import Checkbox from '@mui/material/Checkbox'
 import TextField from '@mui/material/TextField'
 import Autocomplete from '@mui/material/Autocomplete'
-import SearchIcon from '@mui/icons-material/Search'
-import BaseLayout from '../components/base'
 import Showcase from '../components/showcase'
 import CatalogCard from '../components/catalogCard'
-import catalogStyles from '../css/catalog.module.css'
 
 import menuItems from '../testdata/menuItems.json'
 import products from '../testdata/products.json'
-
 
 export default function Catalog(props) {
   const [productsShow, setProductsShow] = useState(products)

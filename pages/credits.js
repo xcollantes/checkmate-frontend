@@ -1,6 +1,3 @@
-import BaseLayout from '../components/base'
-
-
 export default function Credits() {
   return (
     <div>Icons made by {' '}
