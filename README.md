@@ -22,13 +22,29 @@
 
 ### .env.local
 
-Global variables for web app.  In production, this can be replaced with ENV vars.
+Global variables for web app.  In production, this can be replaced with ENV vars. 
+
+```
+NEXT_PUBLIC_FIREBASE_PUBLIC_API_KEY=
+NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=
+NEXT_PUBLIC_FIREBASE_PROJECT_ID=
+NEXT_PUBLIC_FIREBASE_DATABASE_URL=
+NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET=
+NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID=
+NEXT_PUBLIC_FIREBASE_APP_ID=
+NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID=
+```
+
 
 ### config.json
 
 Settings for web app such as website name, home page taglines, links to terms, links to privacy statement, and color scheme.  Acts as global variables for application.  
 
-###
+
+
+### firebaseApp.js 
+
+Firebase specific credentials.
 
 ## Common pitfalls
 
