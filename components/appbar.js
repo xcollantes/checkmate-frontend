@@ -22,30 +22,30 @@ export default function TopAppBar({ hideLogo, hideLogin, userAccount }) {
     router.push("/login?comebacksoon=:D")
   }
   const logoPlaceholder = <Typography variant="h6"
-                                      component="div" sx={{ flexGrow: 1 }}>
-                          </Typography>
+    component="div" sx={{ flexGrow: 1 }}>
+  </Typography>
 
   const logoFeature = <Link href="/">
-                        <Typography variant="h6"
-                            component="div"
-                            sx={{ flexGrow: 1 }}
-                            className={utilStyles.headerLogoAppBar}>
-                          Checkmate
-                        </Typography>
-                      </Link>
+    <Typography variant="h6"
+      component="div"
+      sx={{ flexGrow: 1 }}
+      className={utilStyles.headerLogoAppBar}>
+      {configData.METADATA.WEBSITE_NAME}
+    </Typography>
+  </Link>
 
   const loginFeature = <Link href="/login">
-                         <Button style={{ backgroundColor: "transparent" }}
-                                 color="inherit">
-                           Login
-                         </Button>
-                       </Link>
+    <Button style={{ backgroundColor: "transparent" }}
+      color="inherit">
+      Login
+    </Button>
+  </Link>
 
   const logoutFeature = <Button style={{ backgroundColor: "transparent" }}
-                            color="inherit"
-                            onClick={() => signOutUser()}>
-                          Logout {user && user.displayName}
-                        </Button>
+    color="inherit"
+    onClick={() => signOutUser()}>
+    Logout {user && user.displayName}
+  </Button>
 
   const topRightBar = () => {
     if (user) {
@@ -60,13 +60,12 @@ export default function TopAppBar({ hideLogo, hideLogin, userAccount }) {
   }
 
   return (
-    <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static">
-        <Toolbar>
-          {hideLogo ? logoPlaceholder : logoFeature}
-          {topRightBar()}
-        </Toolbar>
-      </AppBar>
-    </Box>
+    <AppBar position="static">
+      <Toolbar>
+        {hideLogo ? logoPlaceholder : logoFeature}
+        {topRightBar()}
+      </Toolbar>
+    </AppBar>
+
   )
 }

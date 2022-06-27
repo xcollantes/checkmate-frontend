@@ -7,10 +7,8 @@ import Button from '@mui/material/Button'
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import Typography from '@mui/material/Typography'
 import ProductActionButton from '../components/actionButtonProduct'
-import BaseLayout from '../components/base'
 
 import products from '../testdata/products.json'
-
 
 export async function getStaticProps(context) {
   // No-op since getStaticPaths needs getStaticProps to be called.
@@ -45,45 +43,43 @@ export default function Product() {
   }
 
   return (
-    <BaseLayout>
-      <Box sx={{ mt: "2.5rem" }}>
-        <Grid container justifyContent="space-evenly" spacing={3.5}>
-          <Grid item xs={12} xs={6}>
-            <Box sx={{ position: "relative", height: "20rem"}}>
-              <Image src={"/../public/images/products/" + productData.image}
-                     layout="fill"
-                     objectFit="contain" />
-            </Box>
-          </Grid>
-          <Grid item xs={6}>
-            <Typography variant="body1">
-              TODO: Some number of sites and list of sites available
-            </Typography>
-          </Grid>
-
-          <Grid item xs={12}>
-            <Typography variant="h5" textAlign="left">{productData.name}</Typography>
-          </Grid>
-          <Grid item xs={12}>
-            {renderCartButton
-              ? <Button variant="outlined" color="secondary" size="small">
-                  <AddShoppingCartIcon fontSize="small" />Add
-                </Button>
-              : <ProductActionButton productLink={productData.name} />
-            }
-          </Grid>
-
-          <Grid item xs={12}>
-            <Typography variant="body1">
-              TYLER has one arm around Jack's shoulder; the other hand
-              holds a HANDGUN with the barrel lodged in JACK'S MOUTH.
-              Tyler is sitting in Jack's lap. They are both
-              sweating and disheveled, both around 30; Tyler
-              is blond, handsome; and Jack, brunette, is appealing in a
-              dry sort of way.  Tyler looks at his watch.</Typography>
-          </Grid>
+    <Box sx={{ mt: "2.5rem" }}>
+      <Grid container justifyContent="space-evenly" spacing={3.5}>
+        <Grid item xs={12} xs={6}>
+          <Box sx={{ position: "relative", height: "20rem" }}>
+            <Image src={"/../public/images/products/" + productData.image}
+              layout="fill"
+              objectFit="contain" />
+          </Box>
         </Grid>
-      </Box>
-    </BaseLayout>
+        <Grid item xs={6}>
+          <Typography variant="body1">
+            TODO: Some number of sites and list of sites available
+          </Typography>
+        </Grid>
+
+        <Grid item xs={12}>
+          <Typography variant="h5" textAlign="left">{productData.name}</Typography>
+        </Grid>
+        <Grid item xs={12}>
+          {renderCartButton
+            ? <Button variant="outlined" color="secondary" size="small">
+              <AddShoppingCartIcon fontSize="small" />Add
+            </Button>
+            : <ProductActionButton productLink={productData.name} />
+          }
+        </Grid>
+
+        <Grid item xs={12}>
+          <Typography variant="body1">
+            TYLER has one arm around Jack's shoulder; the other hand
+            holds a HANDGUN with the barrel lodged in JACK'S MOUTH.
+            Tyler is sitting in Jack's lap. They are both
+            sweating and disheveled, both around 30; Tyler
+            is blond, handsome; and Jack, brunette, is appealing in a
+            dry sort of way.  Tyler looks at his watch.</Typography>
+        </Grid>
+      </Grid>
+    </Box>
   )
 }

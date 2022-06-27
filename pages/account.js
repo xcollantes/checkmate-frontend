@@ -1,34 +1,28 @@
-import Image from 'next/image'
-import Link from 'next/link'
 import Box from '@mui/material/Box'
-import Fab from '@mui/material/Fab'
+import '@fontsource/carter-one'
 import Typography from '@mui/material/Typography'
-import { useAuthState } from 'react-firebase-hooks/auth'
-import { firebaseAuth } from '../firebaseApp'
+import utilStyles from '../css/utils.module.css'
 import { useUserContext } from '../contexts/user'
-import BaseLayout from '../components/base'
 
-
-export async function getStaticProps(context) {
+export async function getStaticProps() {
   return {
     props: { protected: true }
   }
 }
 
-export default function UserAccount() {
+export default function UserAccount(pageProps) {
   const user = useUserContext()
 
   return (
     <>
-    {user &&
-      <BaseLayout userAccount>
+      {user &&
         <Box sx={{ mt: "3rem" }}>
           <Typography variant="h2">
-            Welcome {user.displayName}!
+            Welcome{user.displayName && ' ' + user.displayName}!
           </Typography>
+          <div className={utilStyles.subheaderLogo}>{user.email}</div>
         </Box>
-      </BaseLayout>
-    }
+      }
     </>
   )
 }

@@ -6,17 +6,25 @@ import {
   GithubAuthProvider,
   EmailAuthProvider,
   PhoneAuthProvider,
-  AnonymousAuthProvider } from 'firebase/auth'
+  AnonymousAuthProvider
+} from 'firebase/auth'
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth'
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
 import { firebaseAuth } from '../firebaseApp'
 import { useUserContext } from '../contexts/user'
+
+import utilsStyle from '../css/utils.module.css'
+
 import configData from '../config.json'
-import BaseLayout from '../components/base'
 
+export async function getStaticProps() {
+  return {
+    props: { hideLogin: true }
+  }
+}
 
-export default function Login() {
+export default function Login(pageProps) {
   const user = useUserContext()
   const router = useRouter()
   const uiConfig = {
@@ -44,14 +52,12 @@ export default function Login() {
 
   return (
     <>
-    {!user &&
-      <BaseLayout hideLogin>
+      {!user &&
         <Box sx={{ mt: '3rem' }}>
-          {byeMsg && <Typography variant="h4">Thank you, please come again!</Typography>}
+          {byeMsg && <Typography variant="h4" className={utilsStyle.headerLogoAppBar}>Thank you, please come again!</Typography>}
           <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={firebaseAuth} />
-          </Box>
-      </BaseLayout>
-    }
+        </Box>
+      }
     </>
   )
 }
