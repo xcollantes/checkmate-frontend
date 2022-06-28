@@ -10,7 +10,7 @@
 // Code taken from https://github.com/mui/material-ui/tree/master/examples/nextjs
 import Document, { Html, Head, Main, NextScript } from 'next/document'
 import createEmotionServer from '@emotion/server/create-instance'
-import createEmotionCache from '../src/createEmotionCache'
+import createEmotionCache from '../themes/createEmotionCache'
 
 export default class MyDocument extends Document {
     render() {
