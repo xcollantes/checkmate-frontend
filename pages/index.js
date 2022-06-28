@@ -37,7 +37,7 @@ export default function Home() {
       <Box className={utilStyles.container}>
         <TripleCard
           cardOneIcon={notifyImage}
-          cardOneContent="Never lose track when your product is back in stock"
+          cardOneContent="Many stores, one notification."
           cardTwoIcon={emailImage}
           cardTwoContent="Avoid spam by never giving your email for notifications again"
           cardThreeIcon={boxPackageImage}
