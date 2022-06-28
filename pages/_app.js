@@ -5,9 +5,11 @@
 // 
 // Styles are defined here for application to all pages.  Since the web app 
 // uses Material UI (which uses Emotion library), 
-// createCache allows for low level customization of how styles get inserted by emotion. It’s intended to be used with the <CacheProvider/> component to override the default cache, which is created with sensible defaults for most applications.
-// a CacheProvider must be used along with a custom `_document.js`
-// page. 
+// createCache allows for low level customization of how styles get 
+// inserted by emotion. It’s intended to be used with the <CacheProvider/> 
+// component to override the default cache, which is created with sensible 
+// defaults for most applications.
+// A CacheProvider must be used along with a custom `_document.js` page. 
 // https://nextjs.org/learn/basics/assets-metadata-css/global-styles
 import Head from 'next/head'
 import { useRouter } from 'next/router'
