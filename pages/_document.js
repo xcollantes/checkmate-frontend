@@ -83,8 +83,6 @@ MyDocument.getInitialProps = async (ctx) => {
         />
     ))
 
-    console.log("DOCUMENT ", emotionStyleTags)
-
     return {
         ...initialProps,
         emotionStyleTags,

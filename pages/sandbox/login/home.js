@@ -7,16 +7,15 @@ import {
   onAuthStateChanged,
   signOut,
   signInWithPopup,
-  signInWithEmailAndPassword } from 'firebase/auth'
+  signInWithEmailAndPassword
+} from 'firebase/auth'
 import { useAuthState } from 'react-firebase-hooks/auth'
 import { firebaseApp, firebaseAuth } from '../../../firebaseApp'
 
 
 export default function Home() {
-  const [ user, loading, error ] = useAuthState(firebaseAuth)
-  console.log("user: ", user, " laoding: ", loading, " error: ", error)
-
-  console.log("user: ", user)
+  const [user, loading, error] = useAuthState(firebaseAuth)
+  console.debug("user: ", user, " laoding: ", loading, " error: ", error)
   return (
     <Box>
       <Typography variant="h1">Some fucking app</Typography>

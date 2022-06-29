@@ -49,7 +49,6 @@ export default function Catalog(props) {
 
   function handleSearchChange(event) {
     let { textContent } = event.target
-    console.log(event)
     setProductsShow(products.filter(product =>
       product.name == textContent))
   }

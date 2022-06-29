@@ -9,7 +9,6 @@ function HomeIndex() {
 
   const router = useRouter()
   const { pid } = router.query
-  console.log(router.query)
   return (
     <Box>
       <Typography variant="h1">Home Index page</Typography>
