@@ -10,6 +10,7 @@ import bigOneImage from '../public/images/1.png'
 import notifyImage from '../public/images/notification.png'
 import boxPackageImage from '../public/images/package.png'
 import emailImage from '../public/images/email.svg'
+import { UserContext, useUserContext } from '../contexts/user'
 
 export async function getStaticProps(context) {
   return {
@@ -20,6 +21,9 @@ export async function getStaticProps(context) {
 export default function Home() {
   return (
     <>
+      <UserContext.Consumer>
+        {({ profileData }) => { return (<p>{profileData}</p>) }}
+      </UserContext.Consumer>
       <Box className={utilStyles.container}>
         <h1 className={utilStyles.headerLogo}>{configData.METADATA.WEBSITE_NAME}</h1>
         <p className={utilStyles.headingLg}>{configData.METADATA.TAGLINE}</p>

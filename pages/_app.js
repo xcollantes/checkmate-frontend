@@ -13,7 +13,6 @@
 // https://nextjs.org/learn/basics/assets-metadata-css/global-styles
 import Head from 'next/head'
 import { useRouter } from 'next/router'
-import Image from 'next/image'
 
 import { ThemeProvider } from '@mui/material/styles'
 import { CssBaseline, Container } from '@mui/material'
@@ -27,6 +26,7 @@ import createEmotionCache from '../themes/createEmotionCache'
 
 import TopAppBar from '../components/appbar'
 import BottomBar from '../components/bottomBar'
+import Loading from '../components/loading'
 
 import { useAuthState } from 'react-firebase-hooks/auth'
 import { firebaseApp, firebaseAuth } from '../firebaseApp'
@@ -38,13 +38,15 @@ const clientEmotionCache = createEmotionCache()
 
 export default function MyApp(props) {
   const { Component, emotionCache = clientEmotionCache, pageProps } = props
-
-  // const [currentUser, setCurrentUser] = useState()
   const route = useRouter()
   const [user, loading, error] = useAuthState(firebaseAuth)
 
+  const userValues = {
+    user: user
+  }
+
   if (pageProps.protected && loading) {
-    return <Image width="400%" height="400%" src="/../public/images/bongo-cat.gif" />
+    return <Loading></Loading>
   } else if (pageProps.protected && !user) {
     route.push("/login")
   }
@@ -52,7 +54,7 @@ export default function MyApp(props) {
   return (
     <>
       <CacheProvider value={emotionCache}>
-        <UserContext.Provider value={user}>
+        <UserContext.Provider value={userValues}>
 
           <Head>
             <link rel="icon" href="/favicon.ico" />
