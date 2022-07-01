@@ -13,5 +13,6 @@
     "PRIMARY": "",
     "SECONDARY": "",
     "BUTTONS": ""
-  }
+  },
+  "FIREBASE_USERS_DATABASE_NAME": "users"
 }
