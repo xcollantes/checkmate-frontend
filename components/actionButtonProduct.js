@@ -1,18 +1,13 @@
 import { useState } from 'react'
-import Link from 'next/link'
 import Box from '@mui/material/Box'
 import Fab from '@mui/material/Fab'
-import Button from '@mui/material/Button'
 import Snackbar from '@mui/material/Snackbar'
-import IconButton from '@mui/material/IconButton'
 import Alert from '@mui/material/Alert'
-import CloseIcon from '@mui/icons-material/Close'
 import { useTheme } from '@mui/material/styles'
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart'
 
-
 /** Call to action to add alert to purchase. */
-export default function ProductActionButton( {productLink} ) {
+export default function ProductActionButton() {
   const theme = useTheme()
   const [open, setOpen] = useState(false)
 
@@ -36,7 +31,7 @@ export default function ProductActionButton( {productLink} ) {
         sx={{ mx: "0" }}
         component="a"
         size="medium">
-        <AddShoppingCartIcon fontSize="small" sx={{ mr: "0.30rem" }}/>Add
+        <AddShoppingCartIcon fontSize="small" sx={{ mr: "0.30rem" }} />Add
       </Fab>
       <Snackbar
         open={open}
