@@ -10,10 +10,11 @@ import {
 } from '../firebase_utils/account_utils'
 import { useAuthContext } from '../contexts/auth'
 import { useProfileContext } from '../contexts/profile'
+import Loading from '../components/loading'
 
 export async function getStaticProps() {
   return {
-    props: { protected: true }
+    props: { protected: true, showLogout: true }
   }
 }
 
@@ -22,46 +23,43 @@ export default function UserAccount() {
   const user = useAuthContext()
   const { profile, setProfile } = useProfileContext()
 
+
   if (!user) {
     route.push("/login")
+    return <></>
+  } else {
+    setProfile("SOME TEXT FPROFILE VALUE")
+    console.log("PROFILE CONTEXT: ", profile)
+    console.log("AUTH CONTEXT: ", user)
+
+    if (!uidProfileExists(user)) {
+      createNewUserProfile(user)
+    }
+
+    return (
+      <>
+        <Box sx={{ mt: "3rem" }}>
+          {user &&
+            <Typography variant="h2" className={utilStyles.subheaderLogo}>
+              Welcome{user.displayName && ' ' + user.displayName}!
+            </Typography>
+          }
+        </Box>
+        <Box>PROFILE: {profile}</Box>
+        <Grid container spacing={3}>
+          <Grid item xs={6}><Card># List of alerts for userContext</Card></Grid>
+          <Grid item xs={6}><Card># My settings</Card></Grid>
+          <Grid item xs={6}><Card># userContext info</Card></Grid>
+          <Grid item xs={6}><Card># Learn how this works</Card></Grid>
+        </Grid>
+
+        {/* debug section */}
+        <Box>
+          <Typography variant="body1">userContext: {user.uid}</Typography>
+          <Typography variant="body1">userContext: {user.email}</Typography>
+          <Typography variant="body1">userContext: {user.email}</Typography>
+        </Box>
+      </>
+    )
   }
-  setProfile("SOME TEXT FPROFILE VALUE")
-  console.log("PROFILE CONTEXT: ", profile)
-  console.log("AUTH CONTEXT: ", user)
-
-  if (!uidProfileExists(user)) {
-    createNewUserProfile(user)
-  }
-
-  // if (authContext && !authContext) {
-  //   user.setProfile(getUserData(user.user))
-  // }
-
-
-  return (
-    <>
-      <Box sx={{ mt: "3rem" }}>
-        {user &&
-          <Typography variant="h2" className={utilStyles.subheaderLogo}>
-            Welcome{user.displayName && ' ' + user.displayName}!
-          </Typography>
-        }
-      </Box>
-      <Box>PROFILE: {profile}</Box>
-      <Grid container spacing={3}>
-        <Grid item xs={6}><Card># List of alerts for userContext</Card></Grid>
-        <Grid item xs={6}><Card># My settings</Card></Grid>
-        <Grid item xs={6}><Card># userContext info</Card></Grid>
-        <Grid item xs={6}><Card># Learn how this works</Card></Grid>
-      </Grid>
-
-      {/* debug section */}
-      <Box>
-        <Typography variant="body1">userContext: {user.uid}</Typography>
-        <Typography variant="body1">userContext: {user.email}</Typography>
-        <Typography variant="body1">userContext: {user.email}</Typography>
-      </Box>
-
-    </>
-  )
 }

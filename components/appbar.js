@@ -13,7 +13,7 @@ import utilStyles from '../css/utils.module.css'
 import { firebaseAuth } from '../firebaseApp'
 import configData from '../config.json'
 
-export default function TopAppBar({ hideLogo, hideLogin }) {
+export default function TopAppBar({ hideLogo, hideLogin, showLogout }) {
   const user = useAuthContext()
   const router = useRouter()
   function signOutUser() {
@@ -46,9 +46,20 @@ export default function TopAppBar({ hideLogo, hideLogin }) {
     Logout {user && user.displayName}
   </Button>
 
+  const accountNameFeature = <Button color="inherit"
+    onClick={() => router.push("/account")}>
+    My account
+  </Button>
+
+  console.log("SHOWLOGOUT: ", showLogout)
+  console.log("HIDELOG: ", hideLogin)
   const topRightBar = () => {
     if (user) {
-      return logoutFeature
+      if (showLogout) {
+        return logoutFeature
+      } else {
+        return accountNameFeature
+      }
     }
     else if (hideLogin) {
       return <></>

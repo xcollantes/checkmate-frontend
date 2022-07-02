@@ -79,8 +79,7 @@ export default function MyApp(props) {
 
               <CssBaseline />
 
-              <TopAppBar hideLogo={pageProps.hideLogo}
-                hideLogin={pageProps.hideLogin}></TopAppBar>
+              <TopAppBar {...pageProps}></TopAppBar>
 
               <Container>
                 <Component {...pageProps} />
