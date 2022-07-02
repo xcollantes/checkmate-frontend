@@ -11,6 +11,8 @@
 // defaults for most applications.
 // A CacheProvider must be used along with a custom `_document.js` page. 
 // https://nextjs.org/learn/basics/assets-metadata-css/global-styles
+import { useState } from 'react'
+
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 
@@ -29,10 +31,11 @@ import BottomBar from '../components/bottomBar'
 import Loading from '../components/loading'
 
 import { useAuthState } from 'react-firebase-hooks/auth'
-import { firebaseApp, firebaseAuth } from '../firebaseApp'
-import { UserContext, useUserContext } from '../contexts/user'
-
+import { firebaseAuth } from '../firebaseApp'
+import { AuthContext, useAuthContext } from '../contexts/auth'
+import { ProfileContext, useProfileContext, ProfileProvider } from '../contexts/profile'
 import configData from '../config.json'
+import { createContext, useContext } from 'react'
 
 const clientEmotionCache = createEmotionCache()
 
@@ -40,10 +43,7 @@ export default function MyApp(props) {
   const { Component, emotionCache = clientEmotionCache, pageProps } = props
   const route = useRouter()
   const [user, loading, error] = useAuthState(firebaseAuth)
-
-  const userValues = {
-    user: user
-  }
+  const [profile, setProfile] = useState("default value")
 
   if (pageProps.protected && loading) {
     return <Loading></Loading>
@@ -54,41 +54,43 @@ export default function MyApp(props) {
   return (
     <>
       <CacheProvider value={emotionCache}>
-        <UserContext.Provider value={userValues}>
+        <AuthContext.Provider value={user}>
+          <ProfileProvider>
 
-          <Head>
-            <link rel="icon" href="/favicon.ico" />
-            <meta
-              name="description"
-              content="{configData.METADATA.WEBSITE_DESCRIPTION}"
-            />
-            <meta
-              property="og:image"
-              content={`https://og-image.vercel.app/${encodeURI(
-                configData.METADATA.WEBSITE_NAME
-              )}.png?theme=light&md=0&fontSize=75px&images=https%3A%2F%2Fassets.vercel.com%2Fimage%2Fupload%2Ffront%2Fassets%2Fdesign%2Fnextjs-black-logo.svg`}
-            />
-            <meta name="keywords" content={configData.METADATA.WEBSITE_TAGS} />
-            <meta name="og:title" content={configData.METADATA.WEBSITE_NAME} />
-            <meta name="twitter:card" content="summary_large_image" />
-            <title>{configData.METADATA.WEBSITE_NAME}</title>
-          </Head>
+            <Head>
+              <link rel="icon" href="/favicon.ico" />
+              <meta
+                name="description"
+                content="{configData.METADATA.WEBSITE_DESCRIPTION}"
+              />
+              <meta
+                property="og:image"
+                content={`https://og-image.vercel.app/${encodeURI(
+                  configData.METADATA.WEBSITE_NAME
+                )}.png?theme=light&md=0&fontSize=75px&images=https%3A%2F%2Fassets.vercel.com%2Fimage%2Fupload%2Ffront%2Fassets%2Fdesign%2Fnextjs-black-logo.svg`}
+              />
+              <meta name="keywords" content={configData.METADATA.WEBSITE_TAGS} />
+              <meta name="og:title" content={configData.METADATA.WEBSITE_NAME} />
+              <meta name="twitter:card" content="summary_large_image" />
+              <title>{configData.METADATA.WEBSITE_NAME}</title>
+            </Head>
 
-          <ThemeProvider theme={theme}>
+            <ThemeProvider theme={theme}>
 
-            <CssBaseline />
+              <CssBaseline />
 
-            <TopAppBar hideLogo={pageProps.hideLogo}
-              hideLogin={pageProps.hideLogin}></TopAppBar>
+              <TopAppBar hideLogo={pageProps.hideLogo}
+                hideLogin={pageProps.hideLogin}></TopAppBar>
 
-            <Container>
-              <Component {...pageProps} />
-            </Container>
+              <Container>
+                <Component {...pageProps} />
+              </Container>
 
-            <BottomBar></BottomBar>
+              <BottomBar></BottomBar>
 
-          </ThemeProvider>
-        </UserContext.Provider>
+            </ThemeProvider>
+          </ProfileProvider>
+        </AuthContext.Provider>
       </CacheProvider>
     </>
   )

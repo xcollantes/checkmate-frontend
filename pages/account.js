@@ -2,12 +2,14 @@ import { useRouter } from 'next/router'
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
 import { Card, Grid } from '@mui/material'
-import { useAuthState } from 'react-firebase-hooks/auth'
 import utilStyles from '../css/utils.module.css'
-import { firebaseApp, firebaseAuth } from '../firebaseApp'
-import { UserContext, useUserContext } from '../contexts/user'
-import Loading from '../components/loading'
-import { createNewUserProfile, getUserData, uidProfileExists } from '../firebase_utils/account_utils'
+import {
+  createNewUserProfile,
+  getUserData,
+  uidProfileExists
+} from '../firebase_utils/account_utils'
+import { useAuthContext } from '../contexts/auth'
+import { useProfileContext } from '../contexts/profile'
 
 export async function getStaticProps() {
   return {
@@ -15,27 +17,37 @@ export async function getStaticProps() {
   }
 }
 
-export default function UserAccount(pageProps) {
+export default function UserAccount() {
   const route = useRouter()
-  const userContext = useUserContext()
+  const user = useAuthContext()
+  const { profile, setProfile } = useProfileContext()
 
-  if (!userContext) {
+  if (!user) {
     route.push("/login")
   }
+  setProfile("SOME TEXT FPROFILE VALUE")
+  console.log("PROFILE CONTEXT: ", profile)
+  console.log("AUTH CONTEXT: ", user)
 
-  if (!uidProfileExists(userContext)) {
-    createNewUserProfile(userContext)
+  if (!uidProfileExists(user)) {
+    createNewUserProfile(user)
   }
+
+  // if (authContext && !authContext) {
+  //   user.setProfile(getUserData(user.user))
+  // }
+
 
   return (
     <>
       <Box sx={{ mt: "3rem" }}>
-        {userContext &&
+        {user &&
           <Typography variant="h2" className={utilStyles.subheaderLogo}>
-            Welcome{userContext.displayName && ' ' + userContext.displayName}!
+            Welcome{user.displayName && ' ' + user.displayName}!
           </Typography>
         }
       </Box>
+      <Box>PROFILE: {profile}</Box>
       <Grid container spacing={3}>
         <Grid item xs={6}><Card># List of alerts for userContext</Card></Grid>
         <Grid item xs={6}><Card># My settings</Card></Grid>
@@ -45,14 +57,9 @@ export default function UserAccount(pageProps) {
 
       {/* debug section */}
       <Box>
-        <Typography variant="body1">userContext: {userContext.uid}</Typography>
-        <Typography variant="body1">userContext: {userContext.email}</Typography>
-        <Typography variant="body1">userContext: {userContext.phoneNumber}</Typography>
-        <Typography variant="body1">userContext: {userContext.displayName}</Typography>
-        <Typography variant="body1">userContext: {userContext.email}</Typography>
-        <Typography variant="body1">userContext: {userContext.providerId}</Typography>
-        <Typography variant="body1">userContext: {userContext.profileURL}</Typography>
-        <Typography variant="body1">userContext: {userContext.providerId}</Typography>
+        <Typography variant="body1">userContext: {user.uid}</Typography>
+        <Typography variant="body1">userContext: {user.email}</Typography>
+        <Typography variant="body1">userContext: {user.email}</Typography>
       </Box>
 
     </>

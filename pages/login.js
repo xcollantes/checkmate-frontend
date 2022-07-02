@@ -12,7 +12,7 @@ import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth'
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
 import { firebaseAuth } from '../firebaseApp'
-import { useUserContext } from '../contexts/user'
+import { useAuthContext } from '../contexts/auth'
 
 import utilsStyle from '../css/utils.module.css'
 
@@ -26,7 +26,7 @@ export async function getStaticProps() {
 }
 
 export default function Login(pageProps) {
-  const user = useUserContext()
+  const user = useAuthContext()
   const router = useRouter()
   const uiConfig = {
     signInOptions: [

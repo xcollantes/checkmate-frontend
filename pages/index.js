@@ -19,6 +19,8 @@ export async function getStaticProps(context) {
 }
 
 export default function Home() {
+  const { profile, setProfile } = useProfileContext()
+  console.log("PROFILE ON HOME: ", profile)
   return (
     <>
       <UserContext.Consumer>

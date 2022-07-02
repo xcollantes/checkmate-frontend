@@ -8,13 +8,13 @@ import Button from '@mui/material/Button'
 import IconButton from '@mui/material/IconButton'
 import MenuIcon from '@mui/icons-material/Menu'
 import { signOut } from 'firebase/auth'
-import { useUserContext } from '../contexts/user'
+import { useAuthContext } from '../contexts/auth'
 import utilStyles from '../css/utils.module.css'
 import { firebaseAuth } from '../firebaseApp'
 import configData from '../config.json'
 
 export default function TopAppBar({ hideLogo, hideLogin }) {
-  const user = useUserContext()
+  const user = useAuthContext()
   const router = useRouter()
   function signOutUser() {
     signOut(firebaseAuth)
