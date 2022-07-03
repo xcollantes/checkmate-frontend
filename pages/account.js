@@ -1,7 +1,9 @@
 import { useRouter } from 'next/router'
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
-import { Card, Grid } from '@mui/material'
+import { Card, CardContent } from '@mui/material'
+import { Tab } from '@mui/material'
+import { TabPanel, TabContext, TabList } from '@mui/lab'
 import utilStyles from '../css/utils.module.css'
 import {
   createNewUserProfile,
@@ -11,6 +13,7 @@ import {
 import { useAuthContext } from '../contexts/auth'
 import { useProfileContext } from '../contexts/profile'
 import Loading from '../components/loading'
+import { useState } from 'react'
 
 export async function getStaticProps() {
   return {
@@ -22,6 +25,7 @@ export default function UserAccount() {
   const route = useRouter()
   const user = useAuthContext()
   const { profile, setProfile } = useProfileContext()
+  const [tabValue, setTabValue] = useState("tabZero")
 
 
   if (!user) {
@@ -36,22 +40,66 @@ export default function UserAccount() {
       createNewUserProfile(user)
     }
 
+    function a11yProps(index) {
+      return {
+        id: `simple-tab-${index}`,
+        'aria-controls': `simple-tabpanel-${index}`,
+      };
+    }
+    const handleTabChange = (event, newTabValue) => { setTabValue(newTabValue) }
+
     return (
       <>
         <Box sx={{ mt: "3rem" }}>
           {user &&
-            <Typography variant="h2" className={utilStyles.subheaderLogo}>
+            <Typography variant="h1" className={utilStyles.subheaderLogo}>
               Welcome{user.displayName && ' ' + user.displayName}!
             </Typography>
           }
         </Box>
-        <Box>PROFILE: {profile}</Box>
-        <Grid container spacing={3}>
-          <Grid item xs={6}><Card># List of alerts for userContext</Card></Grid>
-          <Grid item xs={6}><Card># My settings</Card></Grid>
-          <Grid item xs={6}><Card># userContext info</Card></Grid>
-          <Grid item xs={6}><Card># Learn how this works</Card></Grid>
-        </Grid>
+        <TabContext value={tabValue}>
+          <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
+            <TabList onChange={handleTabChange} variant="fullWidth" textColor="secondary" indicatorColor="secondary">
+              <Tab value="tabZero" label="My Checkmates" />
+              <Tab value="tabOne" label="Alert send" />
+              <Tab value="tabTwo" label="Settings" />
+              <Tab value="tabThree" label="Help center" />
+            </TabList>
+          </Box>
+
+          <TabPanel value="tabZero">
+            {/* <Card>
+              <CardContent> */}
+            <Typography variant="h6">My Checkmates</Typography>
+            <Typography variant="body1">list</Typography>
+            {/* </CardContent>
+            </Card> */}
+          </TabPanel>
+          <TabPanel value="tabOne">
+            <Card>
+              <CardContent>
+                <Typography variant="h6">List of sending alerts</Typography>
+                <Typography variant="body1">list</Typography>
+              </CardContent>
+            </Card>
+          </TabPanel>
+          <TabPanel value="tabTwo">
+            <Card>
+              <CardContent>
+                <Typography variant="h6">Settings</Typography>
+                <Typography variant="body1">list</Typography>
+              </CardContent>
+            </Card>
+          </TabPanel>
+          <TabPanel value="tabThree">
+            <Card>
+              <CardContent>
+                <Typography variant="h6">Help center</Typography>
+                <Typography variant="body1">list</Typography>
+              </CardContent>
+            </Card>
+          </TabPanel>
+        </TabContext>
 
         {/* debug section */}
         <Box>
