@@ -1,6 +1,7 @@
 import { firebaseStorage } from '../firebaseApp'
 import { doc, getDoc, setDoc, Timestamp } from 'firebase/firestore'
 import config from '../config.json'
+import { async } from '@firebase/util'
 
 const firestoreDbName = config.FIREBASE_USERS_DATABASE_NAME
 
@@ -84,3 +85,8 @@ export async function getUserData(user) {
     const userData = docSnapshot.data()
     return userData
 }
+
+export async function addSub() { }
+export async function deleteSub() { }
+export async function getProduct() { }
+export async function getUserProfile() { }

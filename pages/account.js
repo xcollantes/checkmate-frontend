@@ -1,7 +1,8 @@
+import { useState, useContext, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
-import { Card, CardContent } from '@mui/material'
+import { Button, Card, CardContent } from '@mui/material'
 import { Tab } from '@mui/material'
 import { TabPanel, TabContext, TabList } from '@mui/lab'
 import utilStyles from '../css/utils.module.css'
@@ -11,13 +12,16 @@ import {
   uidProfileExists
 } from '../firebase_utils/account_utils'
 import { useAuthContext } from '../contexts/auth'
-import { useProfileContext } from '../contexts/profile'
-import Loading from '../components/loading'
-import { useState } from 'react'
+import { ProfileContext, useProfileContext } from '../contexts/profile'
+import Subscriptions from '../components/account/subscriptions'
+import ActionNotification from '../components/actionNotification'
 
 export async function getStaticProps() {
   return {
-    props: { protected: true, showLogout: true }
+    props: {
+      protected: true,
+      showLogout: true,
+    }
   }
 }
 
@@ -25,31 +29,24 @@ export default function UserAccount() {
   const route = useRouter()
   const user = useAuthContext()
   const { profile, setProfile } = useProfileContext()
-  const [tabValue, setTabValue] = useState("tabZero")
-
+  const [tabValue, setTabValue] = useState("checkmateTab")
 
   if (!user) {
     route.push("/login")
     return <></>
   } else {
-    setProfile("SOME TEXT FPROFILE VALUE")
-    console.log("PROFILE CONTEXT: ", profile)
+    console.log("PROFILE CONTEXT ON ACCOUNT.js: ", profile)
     console.log("AUTH CONTEXT: ", user)
 
     if (!uidProfileExists(user)) {
       createNewUserProfile(user)
     }
 
-    function a11yProps(index) {
-      return {
-        id: `simple-tab-${index}`,
-        'aria-controls': `simple-tabpanel-${index}`,
-      };
-    }
     const handleTabChange = (event, newTabValue) => { setTabValue(newTabValue) }
 
     return (
       <>
+
         <Box sx={{ mt: "3rem" }}>
           {user &&
             <Typography variant="h1" className={utilStyles.subheaderLogo}>
@@ -57,41 +54,38 @@ export default function UserAccount() {
             </Typography>
           }
         </Box>
+
         <TabContext value={tabValue}>
           <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
             <TabList onChange={handleTabChange} variant="fullWidth" textColor="secondary" indicatorColor="secondary">
-              <Tab value="tabZero" label="My Checkmates" />
-              <Tab value="tabOne" label="Alert send" />
-              <Tab value="tabTwo" label="Settings" />
-              <Tab value="tabThree" label="Help center" />
+              <Tab value="checkmateTab" label="My Checkmates" />
+              {/* <Tab value="alertTab" label="Alert send" /> */}
+              <Tab value="settingsTab" label="Settings" />
+              <Tab value="helpTab" label="Help center" />
             </TabList>
           </Box>
 
-          <TabPanel value="tabZero">
-            {/* <Card>
-              <CardContent> */}
-            <Typography variant="h6">My Checkmates</Typography>
-            <Typography variant="body1">list</Typography>
-            {/* </CardContent>
-            </Card> */}
+          <TabPanel value="checkmateTab">
+            <Typography variant="h6">My checkmates</Typography>
+            <Subscriptions></Subscriptions>
           </TabPanel>
-          <TabPanel value="tabOne">
+          <TabPanel value="alertTab">
             <Card>
               <CardContent>
                 <Typography variant="h6">List of sending alerts</Typography>
-                <Typography variant="body1">list</Typography>
               </CardContent>
             </Card>
           </TabPanel>
-          <TabPanel value="tabTwo">
+          <TabPanel value="settingsTab">
             <Card>
               <CardContent>
                 <Typography variant="h6">Settings</Typography>
-                <Typography variant="body1">list</Typography>
+                <Typography variant="body1">Email: {user.email}</Typography>
+                <Typography variant="body1">End subscription</Typography>
               </CardContent>
             </Card>
           </TabPanel>
-          <TabPanel value="tabThree">
+          <TabPanel value="helpTab">
             <Card>
               <CardContent>
                 <Typography variant="h6">Help center</Typography>
@@ -101,12 +95,6 @@ export default function UserAccount() {
           </TabPanel>
         </TabContext>
 
-        {/* debug section */}
-        <Box>
-          <Typography variant="body1">userContext: {user.uid}</Typography>
-          <Typography variant="body1">userContext: {user.email}</Typography>
-          <Typography variant="body1">userContext: {user.email}</Typography>
-        </Box>
       </>
     )
   }

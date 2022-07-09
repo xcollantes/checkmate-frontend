@@ -10,25 +10,21 @@ import bigOneImage from '../public/images/1.png'
 import notifyImage from '../public/images/notification.png'
 import boxPackageImage from '../public/images/package.png'
 import emailImage from '../public/images/email.svg'
-import { UserContext, useUserContext } from '../contexts/user'
+import { useProfileContext } from '../contexts/profile';
 
-export async function getStaticProps(context) {
+export async function getStaticProps() {
   return {
     props: { hideLogo: true }
   }
 }
 
 export default function Home() {
-  const { profile, setProfile } = useProfileContext()
-  console.log("PROFILE ON HOME: ", profile)
   return (
     <>
-      <UserContext.Consumer>
-        {({ profileData }) => { return (<p>{profileData}</p>) }}
-      </UserContext.Consumer>
       <Box className={utilStyles.container}>
         <h1 className={utilStyles.headerLogo}>{configData.METADATA.WEBSITE_NAME}</h1>
         <p className={utilStyles.headingLg}>{configData.METADATA.TAGLINE}</p>
+
         <Box sx={{ '& > :not(style)': { m: 1 } }}>
           <Link href="/catalog">
             <Fab variant="extended"
@@ -43,7 +39,7 @@ export default function Home() {
       <Box className={utilStyles.container}>
         <TripleCard
           cardOneIcon={notifyImage}
-          cardOneContent="Many stores, one notification."
+          cardOneContent="Never lose track when your product is back in stock"
           cardTwoIcon={emailImage}
           cardTwoContent="Avoid spam by never giving your email for notifications again"
           cardThreeIcon={boxPackageImage}

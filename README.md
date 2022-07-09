@@ -22,7 +22,7 @@
 
 ### .env.local
 
-Global variables for web app.  In production, this can be replaced with ENV vars. 
+Global variables for web app.  In production, this can be replaced with ENV vars.
 
 ```
 NEXT_PUBLIC_FIREBASE_PUBLIC_API_KEY=
@@ -35,14 +35,11 @@ NEXT_PUBLIC_FIREBASE_APP_ID=
 NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID=
 ```
 
-
 ### config.json
 
 Settings for web app such as website name, home page taglines, links to terms, links to privacy statement, and color scheme.  Acts as global variables for application.  
 
-
-
-### firebaseApp.js 
+### firebaseApp.js
 
 Firebase specific credentials.
 
@@ -51,6 +48,28 @@ Firebase specific credentials.
 **Fonts don't work**
 
 Use <https://fontsource.org/fonts/carter-one> for importing font.  
+
+**No router instance found**
+
+This happens when router is called from the server since route changes get called in the client.  This usually occurs when there is an issue with the context.
+
+```bash
+No router instance found. you should only use "next/router" inside the client side of your app.
+````
+
+**Which state should I use?**
+
+Use `useState()` for page-wide variables and React Contexts for webapp-wide variables.
+
+<https://www.netlify.com/blog/2020/12/01/using-react-context-for-state-management-in-next.js>
+
+**Output when debugging is a Promise object**
+
+The call to an API returns a Promise object instead of data.  
+
+This happens because the print out statement occurs before data is fufilled in the API call.  Use `.then()` to handle results from an API.
+
+<https://stackoverflow.com/questions/70358000/cant-iterate-through-array-from-an-async-javascript-function>
 
 ### Optimizations
 
