@@ -1,7 +1,6 @@
 import { firebaseStorage } from '../firebaseApp'
 import { doc, getDoc, setDoc, Timestamp } from 'firebase/firestore'
 import config from '../config.json'
-import { async } from '@firebase/util'
 
 const firestoreDbName = config.FIREBASE_USERS_DATABASE_NAME
 
@@ -44,20 +43,37 @@ const defaultUserProfile = {
  */
 export async function createNewUserProfile(user) {
     try {
-        await setDoc(doc(firebaseStorage, firestoreDbName, user.uid), defaultUserProfile)
+        await setDoc(doc(firebaseStorage, firestoreDbName, user.uid),
+            defaultUserProfile)
     } catch (e) {
         console.error("ERROR: Could not create new user profile. ", e)
     }
 }
 
 /**
+ * Get Firebase Document which is the user profile.
+ * 
+ * In Firebase, you currently cannot get a field per call, you must 
+ * get the entire Document.
+ * @param {String} userId Unique user Firebase ID.
+ * @returns User profile Firebase Document data as JSON.
+ */
+export async function getUserProfile(userId) {
+    console.log("GET PROFILE")
+    const subsList = await getDoc(
+        doc(firebaseStorage, firestoreDbName, userId)
+    )
+    return subsList.data()
+}
+
+/**
  * Check to see if user profile exists. 
  * 
- * @param {object} user See createNewUserProfile(). 
+ * @param {object} id See createNewUserProfile(). 
  * @return {boolean} True if user profile exists, else False. 
  */
-export async function uidProfileExists(user) {
-    const userDataRef = doc(firebaseStorage, firestoreDbName, user.uid)
+export async function uidProfileExists(id) {
+    const userDataRef = doc(firebaseStorage, firestoreDbName, id)
     const docSnap = await getDoc(userDataRef)
     return docSnap.exists()
 }
@@ -67,26 +83,25 @@ export async function uidProfileExists(user) {
  * 
  * @param user {} see createNewUserProfile(). 
  */
-export async function updateUserContext(user) {
-    const userFirebaseRef = doc(firebaseStorage, firestoreDbName, user.uid)
-    const docSnapshot = await getDoc(userFirebaseRef)
-    const userData = docSnapshot.data()
-    return userData
+export async function updateProfileContext(user) {
+    const docSnapshot = await getDoc(
+        doc(firebaseStorage, firestoreDbName, user.uid)
+    )
+    return docSnapshot.data()
 }
 
-/**
- * Query Firebase user data not already with the login provider. 
- * 
- * @param user {} see createNewUserProfile(). 
- */
-export async function getUserData(user) {
-    const userFirebaseRef = doc(firebaseStorage, firestoreDbName, user.uid)
-    const docSnapshot = await getDoc(userFirebaseRef)
-    const userData = docSnapshot.data()
-    return userData
-}
 
-export async function addSub() { }
-export async function deleteSub() { }
-export async function getProduct() { }
-export async function getUserProfile() { }
+
+// /**
+//  * Query Firebase user data not already with the login provider. 
+//  * 
+//  * @param user {} see createNewUserProfile(). 
+//  * @returns User profile data as JSON.
+//  */
+// export async function getUserData(user) {
+//     const docSnapshot = await getDoc(
+//         doc(firebaseStorage, firestoreDbName, user.uid)
+//     )
+//     return docSnapshot.data()
+
+// }

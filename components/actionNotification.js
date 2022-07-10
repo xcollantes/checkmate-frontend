@@ -1,9 +1,6 @@
 import { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
-import Box from '@mui/material/Box'
-import Fab from '@mui/material/Fab'
-import Snackbar from '@mui/material/Snackbar'
-import Alert from '@mui/material/Alert'
+import { Box, Button, Fab, Snackbar, Alert } from '@mui/material'
 
 ActionNotification.propTypes = {
   buttonText: PropTypes.string,
@@ -62,7 +59,7 @@ export default function ActionNotification(
         open={open}
         autoHideDuration={alertDuration}
         onClose={handleClose}>
-        <Alert
+        <Alert  // If `action=` not specified, an "X" will appear 
           sx={{ width: "100%" }}
           severity={alertType}
           onClose={handleClose}

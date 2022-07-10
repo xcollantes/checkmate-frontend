@@ -1,20 +1,21 @@
 import { useState, useContext, useEffect } from 'react'
 import { useRouter } from 'next/router'
-import Box from '@mui/material/Box'
-import Typography from '@mui/material/Typography'
-import { Button, Card, CardContent } from '@mui/material'
-import { Tab } from '@mui/material'
+import { Box, Card, CardContent, Tab, Typography } from '@mui/material'
 import { TabPanel, TabContext, TabList } from '@mui/lab'
 import utilStyles from '../css/utils.module.css'
 import {
   createNewUserProfile,
-  getUserData,
   uidProfileExists
 } from '../firebase_utils/account_utils'
+
 import { useAuthContext } from '../contexts/auth'
-import { ProfileContext, useProfileContext } from '../contexts/profile'
+import { useProfileContext } from '../contexts/profile'
+
 import Subscriptions from '../components/account/subscriptions'
-import ActionNotification from '../components/actionNotification'
+import UserSettings from '../components/account/user_settings'
+
+import { getUserProfile } from '../firebase_utils/account_utils'
+import { addSub } from '../firebase_utils/subscriptions_utils'
 
 export async function getStaticProps() {
   return {
@@ -28,19 +29,22 @@ export async function getStaticProps() {
 export default function UserAccount() {
   const route = useRouter()
   const user = useAuthContext()
-  const { profile, setProfile } = useProfileContext()
+  // const { profile, setProfile } = useProfileContext()
   const [tabValue, setTabValue] = useState("checkmateTab")
+  // const [localProfile, setLocalProfile] = useState(0)
 
   if (!user) {
     route.push("/login")
     return <></>
   } else {
-    console.log("PROFILE CONTEXT ON ACCOUNT.js: ", profile)
     console.log("AUTH CONTEXT: ", user)
 
-    if (!uidProfileExists(user)) {
-      createNewUserProfile(user)
-    }
+    // Use THEN because uidProfileExists() returns Promise and won't evaluate 
+    uidProfileExists(user.uid).then(exists => {
+      if (!exists) {
+        createNewUserProfile(user)
+      }
+    })
 
     const handleTabChange = (event, newTabValue) => { setTabValue(newTabValue) }
 
@@ -57,7 +61,8 @@ export default function UserAccount() {
 
         <TabContext value={tabValue}>
           <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
-            <TabList onChange={handleTabChange} variant="fullWidth" textColor="secondary" indicatorColor="secondary">
+            <TabList onChange={handleTabChange} variant="fullWidth"
+              textColor="secondary" indicatorColor="secondary">
               <Tab value="checkmateTab" label="My Checkmates" />
               {/* <Tab value="alertTab" label="Alert send" /> */}
               <Tab value="settingsTab" label="Settings" />
@@ -66,8 +71,7 @@ export default function UserAccount() {
           </Box>
 
           <TabPanel value="checkmateTab">
-            <Typography variant="h6">My checkmates</Typography>
-            <Subscriptions></Subscriptions>
+            <Subscriptions userId={user.uid}></Subscriptions>
           </TabPanel>
           <TabPanel value="alertTab">
             <Card>
@@ -79,16 +83,13 @@ export default function UserAccount() {
           <TabPanel value="settingsTab">
             <Card>
               <CardContent>
-                <Typography variant="h6">Settings</Typography>
-                <Typography variant="body1">Email: {user.email}</Typography>
-                <Typography variant="body1">End subscription</Typography>
+                <UserSettings></UserSettings>
               </CardContent>
             </Card>
           </TabPanel>
           <TabPanel value="helpTab">
             <Card>
               <CardContent>
-                <Typography variant="h6">Help center</Typography>
                 <Typography variant="body1">list</Typography>
               </CardContent>
             </Card>

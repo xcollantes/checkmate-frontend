@@ -1,17 +1,25 @@
+import { useState } from "react"
 import Link from "next/link"
-import { Avatar, Button, Checkbox, IconButton, List, ListItem, ListItemAvatar, ListItemButton, ListItemText, Tooltip, Typography } from "@mui/material"
-import { useEffect, useState } from "react"
-import Box from '@mui/material/Box'
-import Fab from '@mui/material/Fab'
-import Snackbar from '@mui/material/Snackbar'
-import Alert from '@mui/material/Alert'
-
+import {
+  Alert,
+  Avatar,
+  Button,
+  Box,
+  IconButton,
+  List,
+  ListItem,
+  ListItemAvatar,
+  ListItemButton,
+  ListItemText,
+  Snackbar,
+  Tooltip,
+  Typography
+} from "@mui/material"
 import HighlightOffRoundedIcon from '@mui/icons-material/HighlightOffRounded'
-import ActionNotification from '../../components/actionNotification'
 import theme from '../../themes/theme'
-import Product from "../../pages/[pid]"
+import { addSub, getSubs } from "../../firebase_utils/subscriptions_utils"
 
-export default function Subscriptions() {
+export default function Subscriptions({ userId }) {
   const [userSubs, setUserSubs] = useState([
     { id: "xbox_series_x", name: "Xbox Series X" },
     { id: "sig_saur_mpx", name: "Sig Saur MPX" },
@@ -53,7 +61,7 @@ export default function Subscriptions() {
       )
     }
   }
-
+  addSub("NEWSUB", userId)
   return (
     <>
       <Snackbar
