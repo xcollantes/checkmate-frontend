@@ -6,8 +6,6 @@ import { useEffect, useRef, useState } from 'react'
 import { Button, Typography } from '@mui/material'
 import { useAuthContext } from '../../contexts/auth'
 import { getUserProfile } from '../../firebase_utils/account_utils'
-import config from '../../config.json'
-
 
 export default function UserSettings() {
   const user = useAuthContext()
@@ -15,6 +13,7 @@ export default function UserSettings() {
 
   const saveText = "Save changes"
   const handleSaveClick = () => { }
+  console.log("PROFILE: ", profile)
 
   useEffect(() => getUserProfile(user.uid).then(p => { setProfile(p) }), [])
 
@@ -35,8 +34,8 @@ export default function UserSettings() {
       <Typography variant="body1">Birthday: {profile && profile.birthdate}</Typography>
 
       <Typography variant="h6">My alert preferences</Typography>
-      {/* <Typography variant="body1">Email: {profile.sending_preference.email}</Typography> */}
-      {/* <Typography variant="body1">Email: {profile.sending_preference.sms}</Typography> */}
+      <Typography variant="body1">Email: {profile && profile.sending_preferences.email}</Typography>
+      <Typography variant="body1">Email: {profile && profile.sending_preferences.sms}</Typography>
 
       <Button variant="contained" color="secondary" sx={{ mt: 2 }}
         onClick={handleSaveClick}>
