@@ -11,7 +11,7 @@ const defaultUserProfile = {
     birthdate: null,
     light_mode: true,
     language: null,
-    subscriptions: {},
+    subscriptions: [],
     location: {
         country: null,
         city: null,
@@ -93,9 +93,9 @@ export async function updateProfileContext(user) {
 
 
 // /**
-//  * Query Firebase user data not already with the login provider. 
-//  * 
-//  * @param user {} see createNewUserProfile(). 
+//  * Query Firebase user data not already with the login provider.
+//  *
+//  * @param user {} see createNewUserProfile().
 //  * @returns User profile data as JSON.
 //  */
 // export async function getUserData(user) {

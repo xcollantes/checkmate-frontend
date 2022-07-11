@@ -45,7 +45,13 @@ export async function deleteSub() { }
  */
 export async function getSubs(userId) {
     const userProfile = await getUserProfile(userId)
-    return new Set(userProfile.subscriptions)
+    console.log("SUBS in SUB: ", userProfile.subscriptions)
+    const subsSet = new Set(userProfile.subscriptions)
+    if (subsSet) {
+        return subsSet
+    } else {
+        return new Set(null)
+    }
 }
 
 export async function getProduct() { }
