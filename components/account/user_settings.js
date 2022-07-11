@@ -3,7 +3,7 @@
  */
 
 import { useEffect, useRef, useState } from 'react'
-import { Button, Typography } from '@mui/material'
+import { Button, TextField, Typography } from '@mui/material'
 import { useAuthContext } from '../../contexts/auth'
 import { getUserProfile } from '../../firebase_utils/account_utils'
 
@@ -26,16 +26,52 @@ export default function UserSettings() {
 
       <Typography variant="h6">My info</Typography>
 
-      <Typography variant="body1">Email: {user.email}</Typography>
-      <Typography variant="body1">Phone number: {user.phoneNumber}</Typography>
-      <Typography variant="body1">Secondary email: {profile && profile.alternate_email}</Typography>
-      <Typography variant="body1">First name: {profile && profile.first_name}</Typography>
-      <Typography variant="body1">Last name: {profile && profile.last_name}</Typography>
-      <Typography variant="body1">Birthday: {profile && profile.birthdate}</Typography>
+      {user.email}
+      Phone number: {user.phoneNumber}
+      Secondary {profile && profile.alternate_email}
+      Last name: {profile && profile.last_name}
+      Birthday: {profile && profile.birthdate}
+
+
+      {profile && profile.sending_preferences.email}
+      {profile && profile.sending_preferences.sms}
+
+      <TextField
+        id="profile_first_name"
+        label="First name"
+        defaultValue={profile && profile.first_name} />
+      <TextField
+        id="profile_first_name"
+        label="First name"
+        defaultValue={profile && profile.first_name} />
+      <TextField
+        id="profile_first_name"
+        label="First name"
+        defaultValue={profile && profile.first_name} />
+      <TextField
+        id="profile_first_name"
+        label="First name"
+        defaultValue={profile && profile.first_name} />
+      <TextField
+        id="profile_first_name"
+        label="First name"
+        defaultValue={profile && profile.first_name} />
 
       <Typography variant="h6">My alert preferences</Typography>
-      <Typography variant="body1">Email: {profile && profile.sending_preferences.email}</Typography>
-      <Typography variant="body1">Email: {profile && profile.sending_preferences.sms}</Typography>
+
+      <TextField
+        id="profile_first_name"
+        label="First name"
+        defaultValue={profile && profile.first_name} />
+      <TextField
+        id="profile_first_name"
+        label="First name"
+        defaultValue={profile && profile.first_name} />
+      <TextField
+        id="profile_first_name"
+        label="First name"
+        defaultValue={profile && profile.first_name} />
+
 
       <Button variant="contained" color="secondary" sx={{ mt: 2 }}
         onClick={handleSaveClick}>
