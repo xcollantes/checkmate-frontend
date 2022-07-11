@@ -1,45 +1,56 @@
 import { useState } from 'react'
-import Grid from '@mui/material/Grid'
-import Box from '@mui/material/Box'
-import FormGroup from '@mui/material/FormGroup'
-import FormControlLabel from '@mui/material/FormControlLabel'
-import Checkbox from '@mui/material/Checkbox'
-import TextField from '@mui/material/TextField'
-import Autocomplete from '@mui/material/Autocomplete'
+import {
+  Box, FormGroup, Grid,
+  FormControlLabel, Checkbox, TextField, Autocomplete
+} from '@mui/material'
 import Showcase from '../components/showcase'
 import CatalogCard from '../components/catalogCard'
+
+import { getAllProducts } from '../firebase_utils/product_utils'
 
 import menuItems from '../testdata/menuItems.json'
 import products from '../testdata/products.json'
 
-export default function Catalog(props) {
+export default function Catalog() {
   const [productsShow, setProductsShow] = useState(products)
   const [selectedCatagories, setSelectedCatagories] = useState(menuItems)  // Default all items selected
 
+  function test() {
+
+    console.log("TEST: ", menuItems)
+    console.log({ ...menuItems })
+  }
+  test()
+  // console.log(getAllProducts())
+
   function handleChangeMenu(event) {
     let { name, checked } = event.target
-    // https://stackoverflow.com/a/69446324/8278075
-    const newSelectedCatagories = selectedCatagories.map(item => item.name == name ? {
-      ...item,
-      menuSelect: checked
-    } : item
+    // https://stackoverflow.com/a/69446324
+    const newSelectedCatagories = selectedCatagories.map(
+      item => item.name == name ? {
+        ...item,
+        menuSelect: checked
+      } : item
     )
 
-    // If catagory is selected, then push onto an array
-    // https://stackoverflow.com/a/69553466/8278075
+    // If catagory is selected, then push onto an array for easy iteration 
+    // since I don't currently know how to check for includes in JSON object. 
+    // https://stackoverflow.com/a/69553466
     let flatSelected = []
-    const flatNewSelectedCatagories = newSelectedCatagories.map(selected => {
+    newSelectedCatagories.map(selected => {
       if (selected.menuSelect) {
         flatSelected.push(selected.name)
       }
     })
 
-    // Render products which are marked as TRUE in array of menu items "flatSelected[]"
+    // Products which are marked as TRUE in array of menu items "flatSelected[]"
     const newProductsShow = products.filter(product =>
       flatSelected.includes(product.catagory))
 
+    // Update the state of selected 
     setSelectedCatagories(newSelectedCatagories)
 
+    // Render product tiles; render all products if no filters selected 
     if (flatSelected.length == 0) {
       setProductsShow(products)
     } else {
@@ -105,7 +116,6 @@ export default function Catalog(props) {
       <Box sx={{ mt: "1rem" }}>
         {catalogSearchBar()}
       </Box>
-
       <Box>
         <Showcase lefthand={buildMenuItems(menuItems)}
           righthand={buildCatalogGrid()}>
