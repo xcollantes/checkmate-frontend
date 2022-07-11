@@ -3,19 +3,20 @@ import { useRouter } from 'next/router'
 import { Box, Card, CardContent, Tab, Typography } from '@mui/material'
 import { TabPanel, TabContext, TabList } from '@mui/lab'
 import utilStyles from '../css/utils.module.css'
-import {
-  createNewUserProfile,
-  uidProfileExists
-} from '../firebase_utils/account_utils'
-
-import { useAuthContext } from '../contexts/auth'
-import { useProfileContext } from '../contexts/profile'
 
 import Subscriptions from '../components/account/subscriptions'
 import UserSettings from '../components/account/user_settings'
 
-import { getUserProfile } from '../firebase_utils/account_utils'
-import { addSub } from '../firebase_utils/subscriptions_utils'
+import { useAuthContext } from '../contexts/auth'
+import { useProfileContext } from '../contexts/profile'
+
+import {
+  createNewUserProfile,
+  uidProfileExists,
+  getUserProfile,
+  getDisplayName
+} from '../firebase_utils/account_utils'
+import { addSub } from '../firebase_utils/subscription_utils'
 
 export async function getStaticProps() {
   return {
@@ -37,8 +38,6 @@ export default function UserAccount() {
     route.push("/login")
     return <></>
   } else {
-    console.log("AUTH CONTEXT: ", user)
-
     // Use THEN because uidProfileExists() returns Promise and won't evaluate 
     uidProfileExists(user.uid).then(exists => {
       if (!exists) {
@@ -54,7 +53,8 @@ export default function UserAccount() {
         <Box sx={{ mt: "3rem" }}>
           {user &&
             <Typography variant="h1" className={utilStyles.subheaderLogo}>
-              Welcome{user.displayName && ' ' + user.displayName}!
+              Welcome{getDisplayName(user.displayName,
+                "firstname", "lastname", true)}!
             </Typography>
           }
         </Box>

@@ -17,7 +17,7 @@ import {
 } from "@mui/material"
 import HighlightOffRoundedIcon from '@mui/icons-material/HighlightOffRounded'
 import theme from '../../themes/theme'
-import { addSub, getSubs } from "../../firebase_utils/subscriptions_utils"
+import { addSub, getSubs } from "../../firebase_utils/subscription_utils"
 
 export default function Subscriptions({ userId }) {
   const [userSubs, setUserSubs] = useState([
@@ -61,7 +61,7 @@ export default function Subscriptions({ userId }) {
       )
     }
   }
-  addSub("NEWSUB", userId)
+
   return (
     <>
       <Snackbar

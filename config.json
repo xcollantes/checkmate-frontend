@@ -14,5 +14,6 @@
     "SECONDARY": "",
     "BUTTONS": ""
   },
-  "FIREBASE_USERS_DATABASE_NAME": "users"
+  "FIREBASE_USERS_DATABASE_NAME": "users",
+  "FIREBASE_PRODUCTS_DATABASE_NAME": "products"
 }

@@ -6,8 +6,6 @@ import { useEffect, useRef, useState } from 'react'
 import { Button, TextField, Typography } from '@mui/material'
 import { useAuthContext } from '../../contexts/auth'
 import { getUserProfile } from '../../firebase_utils/account_utils'
-import config from '../../config.json'
-
 
 export default function UserSettings() {
   const user = useAuthContext()
@@ -15,6 +13,7 @@ export default function UserSettings() {
 
   const saveText = "Save changes"
   const handleSaveClick = () => { }
+  console.log("PROFILE: ", profile)
 
   useEffect(() => getUserProfile(user.uid).then(p => { setProfile(p) }), [])
 
@@ -34,7 +33,7 @@ export default function UserSettings() {
       Birthday: {profile && profile.birthdate}
 
 
-      profile && profile.sending_preferences.email}
+      {profile && profile.sending_preferences.email}
       {profile && profile.sending_preferences.sms}
 
       <TextField
