@@ -15,14 +15,6 @@ export default function Catalog() {
   const [productsShow, setProductsShow] = useState(products)
   const [selectedCatagories, setSelectedCatagories] = useState(menuItems)  // Default all items selected
 
-  function test() {
-
-    console.log("TEST: ", menuItems)
-    console.log({ ...menuItems })
-  }
-  test()
-  // console.log(getAllProducts())
-
   function handleChangeMenu(event) {
     let { name, checked } = event.target
     // https://stackoverflow.com/a/69446324
