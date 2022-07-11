@@ -1,5 +1,9 @@
-import { firebaseStorage } from '../firebaseApp'
+/**
+ * Functions to handle user account data from Firebase storage.  
+ */
+
 import { doc, getDoc, setDoc, Timestamp } from 'firebase/firestore'
+import { firebaseStorage } from '../firebaseApp'
 import config from '../config.json'
 
 const firestoreDbName = config.FIREBASE_USERS_DATABASE_NAME
@@ -59,7 +63,7 @@ export async function createNewUserProfile(user) {
  * @returns User profile Firebase Document data as JSON.
  */
 export async function getUserProfile(userId) {
-    console.log("GET PROFILE")
+    console.debug("API CALL: GET PROFILE")
     const subsList = await getDoc(
         doc(firebaseStorage, firestoreDbName, userId)
     )
@@ -73,6 +77,7 @@ export async function getUserProfile(userId) {
  * @return {boolean} True if user profile exists, else False. 
  */
 export async function uidProfileExists(id) {
+    console.debug("API CALL: uidProfileExists")
     const userDataRef = doc(firebaseStorage, firestoreDbName, id)
     const docSnap = await getDoc(userDataRef)
     return docSnap.exists()
@@ -84,6 +89,7 @@ export async function uidProfileExists(id) {
  * @param user {} see createNewUserProfile(). 
  */
 export async function updateProfileContext(user) {
+    console.debug("API CALL: updateProfileContext")
     const docSnapshot = await getDoc(
         doc(firebaseStorage, firestoreDbName, user.uid)
     )
@@ -91,6 +97,37 @@ export async function updateProfileContext(user) {
 }
 
 
+/**
+ * Build user display name. 
+ * 
+ * Name can come from either Firebase Auth or Firebase profile. 
+ * 
+ * @param {String} authName Firebase Auth object variable `displayName`. 
+ * This cannot be changed by Checkmate.  Changed with account provider (Google,
+ * Github, Facebook). 
+ * @param {String} firstName Specified by user and stored on Checkmate.
+ * @param {String} lastName Specified by user and stored by Checkmate. 
+ * @param {boolean} preSpace True will include a space before name. 
+ * @returns String of available name. 
+ */
+export function getDisplayName(authName, firstName, lastName,
+    preSpace = false) {
+    let fullName = ""
+    if (authName) {
+        fullName = authName
+    } else if (firstName && lastName) {
+        fullName = `${firstName} ${lastName}`
+    } else if (firstName && !lastName) {
+        fullName = `${firstName}`
+    }
+
+    if (preSpace) {
+        fullName = " " + fullName.trim()
+    } else {
+        fullName = fullName.trim()
+    }
+    return fullName
+}
 
 // /**
 //  * Query Firebase user data not already with the login provider. 

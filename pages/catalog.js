@@ -8,23 +8,28 @@ import CatalogCard from '../components/catalogCard'
 
 import { getAllProducts } from '../firebase_utils/product_utils'
 
-import menuItems from '../testdata/menuItems.json'
+import menuItems from '../catalog_data/categories.json'
 import products from '../testdata/products.json'
 
 export default function Catalog() {
-  const [productsShow, setProductsShow] = useState(products)
+  const [productsShow, setProductsShow] = useState(getAllProducts())
   const [selectedCatagories, setSelectedCatagories] = useState(menuItems)  // Default all items selected
 
-  function test() {
+  function test(p) {
 
-    console.log("TEST: ", menuItems)
-    console.log({ ...menuItems })
+
+    console.log("TEST: ", products)
+    console.log("FIREBASE: ", p)
   }
-  test()
-  // console.log(getAllProducts())
+
+  getAllProducts().then(initialProducts => {
+    useEffect(() => {
+      setProductsShow(preProducts => initialProducts)
+    }, [productsShow])
+  })
 
   function handleChangeMenu(event) {
-    let { name, checked } = event.target
+    const { name, checked } = event.target
     // https://stackoverflow.com/a/69446324
     const newSelectedCatagories = selectedCatagories.map(
       item => item.name == name ? {
@@ -36,23 +41,23 @@ export default function Catalog() {
     // If catagory is selected, then push onto an array for easy iteration 
     // since I don't currently know how to check for includes in JSON object. 
     // https://stackoverflow.com/a/69553466
-    let flatSelected = []
+    const flatSelected = []
     newSelectedCatagories.map(selected => {
       if (selected.menuSelect) {
-        flatSelected.push(selected.name)
+        flatSelected.push(selected.name.toLocaleLowerCase())
       }
     })
 
     // Products which are marked as TRUE in array of menu items "flatSelected[]"
     const newProductsShow = products.filter(product =>
-      flatSelected.includes(product.catagory))
+      flatSelected.includes(product.catagory.toLowerCase()))
 
     // Update the state of selected 
     setSelectedCatagories(newSelectedCatagories)
 
     // Render product tiles; render all products if no filters selected 
     if (flatSelected.length == 0) {
-      setProductsShow(products)
+      setProductsShow(initialProducts)
     } else {
       setProductsShow(newProductsShow)
     }
@@ -97,14 +102,14 @@ export default function Catalog() {
   }
 
   function buildCatalogGrid() {
+    const i = 0
     return (
-      productsShow.map(value =>
-        <Grid item xs={12} sm={6} md={4} key={value.name}>
-          <CatalogCard title={value.name}  // From Products
-            body={value.price}
-            image={"/../public/images/products/"
-              + value.image}
-            productId={value._id}>
+      productsShow.forEach(value =>
+        <Grid item xs={12} sm={6} md={4} key={value.product_name}>
+          <CatalogCard title={value.product_name}  // From Products
+            body={value.price_usd}
+            image={"/../public/images/products/bmw.png"}
+            productId={i + 1}>
           </CatalogCard>
         </Grid>
       )
