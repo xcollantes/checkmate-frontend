@@ -18,11 +18,13 @@ export async function getAllProducts() {
         collection(firebaseStorage, firestoreDbName)
     )
 
-    const productSet = new Set()
+    // const productSet = new Set()
+    const productSet = []
     products.forEach(productDoc => {
-        productSet.add(productDoc.data())
+        productSet.push(productDoc.data())
     })
-    productSet.forEach(x => console.log("SET: ", x.product_name))
-    // productSet.map()
+    // productSet.forEach(x => console.log("SET: ", x.product_name))
+
+    console.log("FULL: ", productSet)
     return productSet
 }
