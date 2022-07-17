@@ -43,6 +43,20 @@ Settings for web app such as website name, home page taglines, links to terms, l
 
 Firebase specific credentials.
 
+## Conventions
+
+### Referring to products by ID
+
+Since the backend is a NoSQL database (Firebase), references between the `users` database and `products` database should be sparse since this could results in large quantities of API calls.  
+
+If references should be made, for example, get product data on user subscriptions, the common key should be the product ID in Firebase.
+
+## Image path naming
+
+Images are named with the same as the product ID.  This convention should hold until the one-to-one relationship with images to products exists.  In other words, this convention doesn't work if you have multiple images per one product.
+
+For example, if the product ID is `xbox_series_x`, then the image path should be `http://.../xbox_series_x.jpeg` or with whatever extension is decided.
+
 ## Common pitfalls
 
 **Fonts don't work**
