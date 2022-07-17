@@ -6,20 +6,32 @@ import {
 import Showcase from '../components/showcase'
 import CatalogCard from '../components/catalogCard'
 
-import { getAllProducts } from '../firebase_utils/product_utils'
+import { getAllProducts, getCategories, toProperCase } from '../firebase_utils/product_utils'
 
 import menuItems from '../catalog_data/categories.json'
-import products from '../testdata/products.json'
 
 export default function Catalog() {
-  const [productsShow, setProductsShow] = useState([])
+  const [productsShow, setProductsShow] = useState()
+  const [allProducts, setAllProducts] = useState()
   const [selectedCatagories, setSelectedCatagories] = useState(menuItems)  // Default all items selected  
   const [loading, setLoading] = useState(false)
 
   useEffect(() => {
-    getAllProducts().then(p => setProductsShow(p))
+    getAllProducts().then(p => {
+      setProductsShow(p)
+      // Retain all products to avoid API call when 
+      // all products are de-selected 
+      setAllProducts(p)
+    })
   }, [])
 
+  /**
+   * Re-render the catalog depending on category selection. 
+   * 
+   * Selected categories are iterated then the products are iterated if 
+   * included in the selection. 
+   * @param {*} event Click on the selection of catagories. 
+   */
   function handleChangeMenu(event) {
     const { name, checked } = event.target
     // https://stackoverflow.com/a/69446324
@@ -36,41 +48,49 @@ export default function Catalog() {
     const flatSelected = []
     const flatNewSelectedCatagories = newSelectedCatagories.map(selected => {
       if (selected.menuSelect) {
-        flatSelected.push(selected.name)
+        flatSelected.push(selected.name.toLowerCase())
       }
     })
 
     // Products which are marked as TRUE in array of menu items "flatSelected[]"
-    const newProductsShow = products.filter(product =>
-      flatSelected.includes(product.catagory))
+    const newProductsShow = allProducts.filter(product =>
+      flatSelected.includes(product.category.toLowerCase()))
 
     // Update the state of selected 
     setSelectedCatagories(newSelectedCatagories)
 
     // Render product tiles; render all products if no filters selected 
     if (flatSelected.length == 0) {
-      getAllProducts().then(p => setProductsShow(p))
+      setProductsShow(allProducts)
     } else {
       setProductsShow(newProductsShow)
     }
   }
 
+  /**
+   * Filter the products rendered.  
+   * @param {*} event Click or text in search bar. 
+   */
   function handleSearchChange(event) {
     let { textContent } = event.target
-    setProductsShow(products.filter(product =>
-      product.name == textContent))
+    setProductsShow(allProducts.filter(product =>
+      product.name.toLowerCase() == textContent.toLowerCase()))
   }
 
-  function catalogSearchBar() {
-    // const productOptions = products.map(product => product.name).sort()
+  console.log(toProperCase("this is text"))
 
+  /**
+   * Render the search bar. 
+   * @returns 
+   */
+  function catalogSearchBar() {
     return (
       <Autocomplete
-        options={products}
+        options={allProducts}
         autoComplete
-        getOptionLabel={option => option.name}
+        getOptionLabel={option => option.product_name}
         onChange={event => handleSearchChange(event)}
-        groupBy={option => option.catagory}
+        groupBy={option => option.category}
 
         noOptionsText="No products found"
         renderInput={params => (
@@ -80,24 +100,33 @@ export default function Catalog() {
     )
   }
 
-  function buildMenuItems(items) {
+  /**
+   * Render the selectable categories.
+   * @param {*} categories Product classification. 
+   * @returns JSX for categories. 
+   */
+  function buildMenuItems() {
     return (
       <FormGroup>
-        {items.map(value =>
+        {menuItems.map(category =>
           <FormControlLabel control={<Checkbox />}
-            name={value.name}
+            name={category.name}
             onChange={event => handleChangeMenu(event)}
-            label={value.name}
-            key={value.name} />)}
+            label={toProperCase(category.name)}
+            key={category.name} />)}
       </FormGroup>
     )
   }
 
+  /**
+   * Renders product tiles in catalog. 
+   * @returns JSX of products with image and other data. 
+   */
   function buildCatalogGrid() {
     const i = 0
     console.debug("RENDER: ", productsShow)
     return (
-      productsShow.forEach(value =>
+      productsShow?.map(value =>
         <Grid item xs={12} sm={6} md={4} key={value.product_name}>
           <CatalogCard title={value.product_name}  // From Products
             body={value.product_name}
@@ -115,7 +144,7 @@ export default function Catalog() {
         {catalogSearchBar()}
       </Box>
       <Box>
-        <Showcase lefthand={buildMenuItems(menuItems)}
+        <Showcase lefthand={buildMenuItems()}
           righthand={buildCatalogGrid()}>
         </Showcase>
       </Box>

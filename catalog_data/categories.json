@@ -1,32 +1,17 @@
 [
     {
         "_id": 1,
-        "name": "Car",
+        "name": "consoles",
         "menuSelect": false
     },
     {
         "_id": 2,
-        "name": "Clothes",
+        "name": "ammo",
         "menuSelect": false
     },
     {
         "_id": 3,
-        "name": "Computers",
-        "menuSelect": false
-    },
-    {
-        "_id": 4,
-        "name": "Food",
-        "menuSelect": false
-    },
-    {
-        "_id": 5,
-        "name": "Ammunition",
-        "menuSelect": false
-    },
-    {
-        "_id": 6,
-        "name": "Empty",
+        "name": "weapons",
         "menuSelect": false
     }
 ]
