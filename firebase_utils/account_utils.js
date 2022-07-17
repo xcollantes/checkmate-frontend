@@ -64,9 +64,8 @@ export async function createNewUserProfile(user) {
  */
 export async function getUserProfile(userId) {
     console.debug("API CALL: GET PROFILE")
-    const subsList = await getDoc(
-        doc(firebaseStorage, firestoreDbName, userId)
-    )
+    console.debug("API CALL: GET PROFILE: ", userId)
+    const subsList = await getDoc(doc(firebaseStorage, firestoreDbName, userId))
     return subsList.data()
 }
 

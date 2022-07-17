@@ -24,7 +24,7 @@ const firestoreDbName = config.FIREBASE_USERS_DATABASE_NAME
  */
 export async function addSub(productId, userId) {
     const subs = await getSubs(userId)
-    subs.add(productId)
+    subs.push(productId)
     try {
         await updateDoc(doc(firebaseStorage, firestoreDbName, userId), {
             subscriptions: Array.from(subs)
@@ -34,7 +34,29 @@ export async function addSub(productId, userId) {
     }
 }
 
-export async function deleteSub() { }
+/**
+ * Remove one user subscription from one user.
+ * 
+ * Requires the client side state of subscriptions list for a user to 
+ * avoid calling on database for user's subscription list. 
+ * 
+ * @param {} userId
+ * @param {String} removeProductId Product ID as listed in Firebase `products`.
+ * @param {Array} currentSubs User subscription list before removal of the 
+ * product.  Client side list of products is used in order to save another 
+ * call to Firebase. 
+ */
+export async function deleteSub(userId, removeProductId, currentSubs) {
+    const newSubs = currentSubs.filter(sub => sub != removeProductId)
+    try {
+        await updateDoc(doc(firebaseStorage, firestoreDbName, userId), {
+            subscriptions: Array.from(newSubs)
+        })
+    } catch (e) {
+        console.error("ERROR: Could not remove subscription: ",
+            removeProductId, " ", e)
+    }
+}
 
 /**
  * Get subscriptions list for one user.
@@ -46,11 +68,12 @@ export async function deleteSub() { }
 export async function getSubs(userId) {
     const userProfile = await getUserProfile(userId)
     console.log("SUBS in SUB: ", userProfile.subscriptions)
-    const subsSet = new Set(userProfile.subscriptions)
-    if (subsSet) {
-        return subsSet
+    // const subsSet = new Set(userProfile.subscriptions)
+    if (userProfile.subscriptions) {
+        // return subsSet
+        return userProfile.subscriptions
     } else {
-        return new Set(null)
+        return []
     }
 }
 

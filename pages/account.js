@@ -12,11 +12,10 @@ import { useProfileContext } from '../contexts/profile'
 
 import {
   createNewUserProfile,
-  uidProfileExists,
+  getDisplayName,
   getUserProfile,
-  getDisplayName
+  uidProfileExists
 } from '../firebase_utils/account_utils'
-import { addSub } from '../firebase_utils/subscription_utils'
 
 export async function getStaticProps() {
   return {
@@ -30,10 +29,9 @@ export async function getStaticProps() {
 export default function UserAccount() {
   const route = useRouter()
   const user = useAuthContext()
-  // const { profile, setProfile } = useProfileContext()
   const [tabValue, setTabValue] = useState("checkmateTab")
-  // const [localProfile, setLocalProfile] = useState(0)
 
+  console.log("USER: ", user)
   if (!user) {
     route.push("/login")
     return <></>
@@ -49,7 +47,6 @@ export default function UserAccount() {
 
     return (
       <>
-
         <Box sx={{ mt: "3rem" }}>
           {user &&
             <Typography variant="h1" className={utilStyles.subheaderLogo}>
@@ -58,7 +55,6 @@ export default function UserAccount() {
             </Typography>
           }
         </Box>
-
         <TabContext value={tabValue}>
           <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
             <TabList onChange={handleTabChange} variant="fullWidth"
@@ -69,7 +65,6 @@ export default function UserAccount() {
               <Tab value="helpTab" label="Help center" />
             </TabList>
           </Box>
-
           <TabPanel value="checkmateTab">
             <Subscriptions userId={user.uid}></Subscriptions>
           </TabPanel>
@@ -95,7 +90,6 @@ export default function UserAccount() {
             </Card>
           </TabPanel>
         </TabContext>
-
       </>
     )
   }

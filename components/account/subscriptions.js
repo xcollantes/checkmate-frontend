@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import Link from "next/link"
 import {
   Alert,
@@ -13,22 +13,22 @@ import {
   ListItemText,
   Snackbar,
   Tooltip,
-  Typography
+  Typography,
 } from "@mui/material"
 import HighlightOffRoundedIcon from '@mui/icons-material/HighlightOffRounded'
 import theme from '../../themes/theme'
-import { addSub, getSubs } from "../../firebase_utils/subscription_utils"
+import { addSub, deleteSub, getSubs } from "../../firebase_utils/subscription_utils"
 
 export default function Subscriptions({ userId }) {
-  const [userSubs, setUserSubs] = useState([
-    { id: "xbox_series_x", name: "Xbox Series X" },
-    { id: "sig_saur_mpx", name: "Sig Saur MPX" },
-    { id: "radio", name: "Radio" }
-  ])
+  const [userSubIds, setUserSubIds] = useState()
   const [open, setOpen] = useState(false)
 
-  const handleClickRemove = (subCancel) => {
-    removeSub(subCancel)
+  useEffect(() => {
+    getSubs(userId).then(p => setUserSubIds(p))
+  }, [])
+
+  const handleClickRemove = (subId) => {
+    removeSub(subId)
     setOpen(true)
   }
 
@@ -39,8 +39,9 @@ export default function Subscriptions({ userId }) {
     setOpen(false)
   }
 
-  const removeSub = (subCancel) => {
-    setUserSubs(prevProducts => prevProducts.filter(p => p.id != subCancel.id))
+  const removeSub = (subCancelId) => {
+    deleteSub(userId, subCancelId, userSubIds)
+    setUserSubIds(prevProducts => prevProducts.filter(p => p != subCancelId))
   }
 
   const emptySubs = (stateLength) => {
@@ -77,42 +78,41 @@ export default function Subscriptions({ userId }) {
         </Alert>
       </Snackbar>
       <List dense sx={{ width: "100%", bgcolor: "background.paper" }}>
-        {emptySubs(userSubs.length)}
+        {userSubIds && emptySubs(userSubIds.length)}
         {
-          userSubs.map(value => {
-            const label = `checkbox-list-secondary-label-${value.id}`
+          userSubIds?.map(subId => {
+            const label = `checkbox-list-secondary-label-${subId}`
             return (
               <>
                 <ListItem
-                  key={value.id}
+                  key={subId}
                   disablePadding
                   secondaryAction={
-                    <Tooltip title={`Unsubscribe ${value.name}`}>
+                    <Tooltip title={`Unsubscribe ${subId}`}>
                       <IconButton
                         color="error"
-                        onClick={() => { handleClickRemove(value) }}>
+                        onClick={() => { handleClickRemove(subId) }}>
                         <HighlightOffRoundedIcon />
                       </IconButton>
                     </Tooltip>
                   }>
-
                   <ListItemButton>
                     <ListItemAvatar>
                       <Avatar
-                        alt={`Avatar n°${value.id}`}
+                        alt={`Avatar n°${subId}`}
                         src='/../public/images/lol.jpeg' />
                     </ListItemAvatar>
                     <ListItemText
-                      id={label.id}
-                      primary={`${value.name}`} />
+                      id={label}
+                      primary={`${subId}`} />
                   </ListItemButton>
-
                 </ListItem>
               </>
             )
           })
         }
       </List>
+      <Button onClick={() => addSub(Date.now(), userId)} variant="outlined">ADD SOME PRODUCT</Button>
     </>
   )
 }
