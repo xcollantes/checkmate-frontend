@@ -12,22 +12,18 @@ import singleCardStyle from '../css/singleCard.module.css'
 import emailImage from '../public/images/email.svg'
 
 export default function SingleCard(props) {
-  console.log("singleCard");
-  // console.log({...props});
-
-  console.log(props.iconImage);
   return (
     <Card raised>
-        <Box sx={{ pt: "20px" }}>
-          <Image src={props.iconImage}
-               height="120em"
-               width="120em"
-               className={singleCardStyle.cardIcon}/>
-        </Box>
+      <Box sx={{ pt: "20px" }}>
+        <Image src={props.iconImage}
+          height="120em"
+          width="120em"
+          className={singleCardStyle.cardIcon} />
+      </Box>
       <CardContent className={singleCardStyle.cardText}>
-      <Typography variant="subtitle1"
-                    textAlign="center"
-                    color="text.primary">
+        <Typography variant="subtitle1"
+          textAlign="center"
+          color="text.primary">
           {props.cardContent}
         </Typography>
       </CardContent>

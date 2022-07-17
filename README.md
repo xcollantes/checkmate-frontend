@@ -22,7 +22,7 @@
 
 ### .env.local
 
-Global variables for web app.  In production, this can be replaced with ENV vars. 
+Global variables for web app.  In production, this can be replaced with ENV vars.
 
 ```
 NEXT_PUBLIC_FIREBASE_PUBLIC_API_KEY=
@@ -35,22 +35,55 @@ NEXT_PUBLIC_FIREBASE_APP_ID=
 NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID=
 ```
 
-
 ### config.json
 
 Settings for web app such as website name, home page taglines, links to terms, links to privacy statement, and color scheme.  Acts as global variables for application.  
 
-
-
-### firebaseApp.js 
+### firebaseApp.js
 
 Firebase specific credentials.
+
+## Conventions
+
+### Referring to products by ID
+
+Since the backend is a NoSQL database (Firebase), references between the `users` database and `products` database should be sparse since this could results in large quantities of API calls.  
+
+If references should be made, for example, get product data on user subscriptions, the common key should be the product ID in Firebase.
+
+## Image path naming
+
+Images are named with the same as the product ID.  This convention should hold until the one-to-one relationship with images to products exists.  In other words, this convention doesn't work if you have multiple images per one product.
+
+For example, if the product ID is `xbox_series_x`, then the image path should be `http://.../xbox_series_x.jpeg` or with whatever extension is decided.
 
 ## Common pitfalls
 
 **Fonts don't work**
 
 Use <https://fontsource.org/fonts/carter-one> for importing font.  
+
+**No router instance found**
+
+This happens when router is called from the server since route changes get called in the client.  This usually occurs when there is an issue with the context.
+
+```bash
+No router instance found. you should only use "next/router" inside the client side of your app.
+````
+
+**Which state should I use?**
+
+Use `useState()` for page-wide variables and React Contexts for webapp-wide variables.
+
+<https://www.netlify.com/blog/2020/12/01/using-react-context-for-state-management-in-next.js>
+
+**Output when debugging is a Promise object**
+
+The call to an API returns a Promise object instead of data.  
+
+This happens because the print out statement occurs before data is fufilled in the API call.  Use `.then()` to handle results from an API.
+
+<https://stackoverflow.com/questions/70358000/cant-iterate-through-array-from-an-async-javascript-function>
 
 ### Optimizations
 

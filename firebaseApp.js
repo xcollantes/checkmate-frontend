@@ -1,7 +1,7 @@
-import { useRouter } from 'next/router'
-import { initializeApp, getApps } from 'firebase/app'
+import { initializeApp } from 'firebase/app'
 import { getAuth, signOut } from 'firebase/auth'
-
+import { getFirestore } from 'firebase/firestore'
+import { getStorage } from 'firebase/storage'
 
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
@@ -18,7 +18,8 @@ const firebaseConfig = {
 // Firebase v9.0.1+ does not need to be checked
 
 const firebaseApp = initializeApp(firebaseConfig)
-
 const firebaseAuth = getAuth()
+const firebaseStorage = getFirestore()
+const firebaseCloudStorage = getStorage(firebaseApp)
 
-export { firebaseApp, firebaseAuth }
+export { firebaseApp, firebaseAuth, firebaseStorage, firebaseCloudStorage }

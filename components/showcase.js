@@ -1,7 +1,6 @@
 import Grid from '@mui/material/Grid'
 import Box from '@mui/material/Box'
 
-
 /** Layout template for a main righthand section for content. 
 
   The lefthand side should contain some object which is

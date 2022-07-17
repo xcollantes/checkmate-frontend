@@ -1,12 +1,8 @@
 import Image from 'next/image'
-import Link from 'next/link'
 import { useRouter } from 'next/router'
-import Grid from '@mui/material/Grid'
-import Box from '@mui/material/Box'
-import Button from '@mui/material/Button'
+import { Box, Typography, Grid } from '@mui/material'
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
-import Typography from '@mui/material/Typography'
-import ProductActionButton from '../components/actionButtonProduct'
+import ActionNotification from '../components/actionNotification'
 
 import products from '../testdata/products.json'
 
@@ -59,15 +55,18 @@ export default function Product() {
         </Grid>
 
         <Grid item xs={12}>
-          <Typography variant="h5" textAlign="left">{productData.name}</Typography>
+          <Typography variant="h5" textAlign="left">
+            {productData.name}
+          </Typography>
         </Grid>
         <Grid item xs={12}>
-          {renderCartButton
-            ? <Button variant="outlined" color="secondary" size="small">
-              <AddShoppingCartIcon fontSize="small" />Add
-            </Button>
-            : <ProductActionButton productLink={productData.name} />
-          }
+          <ActionNotification
+            buttonText={`Add ${productData.name}`}
+            buttonColor="secondary"
+            alertText={`Added ${productData.name} to checkmates`}
+            alertType="success">
+            <AddShoppingCartIcon fontSize="small" sx={{ mr: "0.30rem" }} />
+          </ActionNotification>
         </Grid>
 
         <Grid item xs={12}>
@@ -80,6 +79,6 @@ export default function Product() {
             dry sort of way.  Tyler looks at his watch.</Typography>
         </Grid>
       </Grid>
-    </Box>
+    </Box >
   )
 }

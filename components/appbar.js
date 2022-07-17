@@ -8,14 +8,13 @@ import Button from '@mui/material/Button'
 import IconButton from '@mui/material/IconButton'
 import MenuIcon from '@mui/icons-material/Menu'
 import { signOut } from 'firebase/auth'
-import { useUserContext } from '../contexts/user'
+import { useAuthContext } from '../contexts/auth'
 import utilStyles from '../css/utils.module.css'
 import { firebaseAuth } from '../firebaseApp'
 import configData from '../config.json'
 
-
-export default function TopAppBar({ hideLogo, hideLogin, userAccount }) {
-  const user = useUserContext()
+export default function TopAppBar({ hideLogo, hideLogin, showLogout }) {
+  const user = useAuthContext()
   const router = useRouter()
   function signOutUser() {
     signOut(firebaseAuth)
@@ -47,9 +46,20 @@ export default function TopAppBar({ hideLogo, hideLogin, userAccount }) {
     Logout {user && user.displayName}
   </Button>
 
+  const accountNameFeature = <Button color="inherit"
+    onClick={() => router.push("/account")}>
+    My account
+  </Button>
+
+  console.log("SHOWLOGOUT: ", showLogout)
+  console.log("HIDELOG: ", hideLogin)
   const topRightBar = () => {
     if (user) {
-      return logoutFeature
+      if (showLogout) {
+        return logoutFeature
+      } else {
+        return accountNameFeature
+      }
     }
     else if (hideLogin) {
       return <></>

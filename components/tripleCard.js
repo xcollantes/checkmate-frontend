@@ -7,7 +7,6 @@ import Typography from '@mui/material/Typography'
 import tripleCardStyle from '../css/tripleCard.module.css'
 import SingleCard from '../components/singleCard'
 
-
 const Item = styled(Paper)(({ theme }) => ({
   ...theme.typography.body2,
   padding: theme.spacing(1),

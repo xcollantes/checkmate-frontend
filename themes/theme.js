@@ -11,7 +11,13 @@ const theme = createTheme({
     typography: {
         fontFamily: [
             '-apple-system', 'BlinkMacSystemFont',
-            '"Open Sans"', 'Roboto', 'Oxygen',].join(','),
+            '"Open Sans"', 'Roboto', 'Oxygen', 'Arial', 'Verdana', 'Georgia', 'Courier',
+        ].join(','),
+        body1: {
+            fontFamily: [
+                'Roboto', 'Arial', 'Verdana', 'Georgia', 'Courier',
+            ].join(','),
+        },
     },
 })
 

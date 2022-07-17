@@ -1,0 +1,32 @@
+[
+    {
+        "_id": 1,
+        "name": "Car",
+        "menuSelect": false
+    },
+    {
+        "_id": 2,
+        "name": "Clothes",
+        "menuSelect": false
+    },
+    {
+        "_id": 3,
+        "name": "Computers",
+        "menuSelect": false
+    },
+    {
+        "_id": 4,
+        "name": "Food",
+        "menuSelect": false
+    },
+    {
+        "_id": 5,
+        "name": "Ammunition",
+        "menuSelect": false
+    },
+    {
+        "_id": 6,
+        "name": "Empty",
+        "menuSelect": false
+    }
+]

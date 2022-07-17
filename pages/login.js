@@ -12,11 +12,12 @@ import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth'
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
 import { firebaseAuth } from '../firebaseApp'
-import { useUserContext } from '../contexts/user'
+import { useAuthContext } from '../contexts/auth'
 
 import utilsStyle from '../css/utils.module.css'
 
 import configData from '../config.json'
+import Loading from '../components/loading'
 
 export async function getStaticProps() {
   return {
@@ -25,7 +26,7 @@ export async function getStaticProps() {
 }
 
 export default function Login(pageProps) {
-  const user = useUserContext()
+  const user = useAuthContext()
   const router = useRouter()
   const uiConfig = {
     signInOptions: [
@@ -54,8 +55,13 @@ export default function Login(pageProps) {
     <>
       {!user &&
         <Box sx={{ mt: '3rem' }}>
-          {byeMsg && <Typography variant="h4" className={utilsStyle.headerLogoAppBar}>Thank you, please come again!</Typography>}
-          <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={firebaseAuth} />
+          {byeMsg &&
+            <Typography variant="h4"
+              className={utilsStyle.headerLogoAppBar}>
+              Thank you, please come again!
+            </Typography>}
+          <StyledFirebaseAuth uiConfig={uiConfig}
+            firebaseAuth={firebaseAuth} />
         </Box>
       }
     </>

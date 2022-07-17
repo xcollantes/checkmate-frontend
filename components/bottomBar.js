@@ -12,14 +12,18 @@ import Grid from '@mui/material/Grid'
 
 
 export default function BottomBar() {
-  const theme = useTheme()
+  const theme = useTheme(
+
+  )
 
   return (
-    <Box sx={{ postition: "static",
-               pt: "5rem",
-               pb: "10rem",
-               mt: "5rem",
-               bgcolor: "#001e3c" }}>
+    <Box sx={{
+      postition: "absolute",
+      pt: "5rem",
+      pb: "10rem",
+      mt: "5rem",
+      bgcolor: "#040E3E",
+    }}>
       <Container>
         <Grid container >
           <Grid item xs={12} md={6}>
