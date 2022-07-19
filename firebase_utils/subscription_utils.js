@@ -2,10 +2,7 @@
  * Interact with Firebase database to manipulate user subscriptions. 
  */
 
-import {
-    doc, getDoc, setDoc,
-    Timestamp, updateDoc
-} from 'firebase/firestore'
+import { doc, updateDoc } from 'firebase/firestore'
 import { firebaseStorage } from '../firebaseApp'
 import config from '../config.json'
 import { getUserProfile } from './account_utils'
@@ -23,6 +20,7 @@ const firestoreDbName = config.FIREBASE_USERS_DATABASE_NAME
  * in Firebase database.
  */
 export async function addSub(productId, userId) {
+    console.debug("API CALL: subscriptions utils.addsub")
     const subs = await getSubs(userId)
     subs.push(productId)
     try {
@@ -47,6 +45,7 @@ export async function addSub(productId, userId) {
  * call to Firebase. 
  */
 export async function deleteSub(userId, removeProductId, currentSubs) {
+    console.debug("API CALL: subscriptions utils.deleteSubs")
     const newSubs = currentSubs.filter(sub => sub != removeProductId)
     try {
         await updateDoc(doc(firebaseStorage, firestoreDbName, userId), {
@@ -66,8 +65,8 @@ export async function deleteSub(userId, removeProductId, currentSubs) {
  * to avoid duplicates.
  */
 export async function getSubs(userId) {
+    console.debug("API CALL: subscriptions utils.getSubs")
     const userProfile = await getUserProfile(userId)
-    console.log("SUBS in SUB: ", userProfile.subscriptions)
     // const subsSet = new Set(userProfile.subscriptions)
     if (userProfile.subscriptions) {
         // return subsSet

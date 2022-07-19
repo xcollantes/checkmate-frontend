@@ -6,7 +6,6 @@ import { collection, getDocs } from 'firebase/firestore'
 import { firebaseStorage } from '../firebaseApp'
 
 import config from "../config.json"
-import { async } from '@firebase/util'
 
 const firestoreDbName = config.FIREBASE_PRODUCTS_DATABASE_NAME
 
@@ -14,7 +13,7 @@ const firestoreDbName = config.FIREBASE_PRODUCTS_DATABASE_NAME
  * Call on Firebase storage to get entire catalog of products.
  */
 export async function getAllProducts() {
-    console.debug("API CALL: Get full catalog of products")
+    console.debug("API CALL: product utils.Get full catalog of products")
     const products = await getDocs(
         collection(firebaseStorage, firestoreDbName)
     )
@@ -31,6 +30,7 @@ export async function getAllProducts() {
  * @returns Array of categories given a list of products.
  */
 export function getCategories(productList) {
+    console.debug("API CALL: product utils. getcategories")
     const categories = productList?.map(product => product.category)
     const categorySet = new Set(categories)
     return categorySet

@@ -46,6 +46,7 @@ const defaultUserProfile = {
  * containing user information.
  */
 export async function createNewUserProfile(user) {
+    console.debug("API CALL: account_utils.createnewuserProfile")
     try {
         await setDoc(doc(firebaseStorage, firestoreDbName, user.uid),
             defaultUserProfile)
@@ -63,8 +64,7 @@ export async function createNewUserProfile(user) {
  * @returns User profile Firebase Document data as JSON.
  */
 export async function getUserProfile(userId) {
-    console.debug("API CALL: GET PROFILE")
-    console.debug("API CALL: GET PROFILE: ", userId)
+    console.debug("API CALL:  account_utils.GET PROFILE")
     const subsList = await getDoc(doc(firebaseStorage, firestoreDbName, userId))
     return subsList.data()
 }
@@ -76,7 +76,7 @@ export async function getUserProfile(userId) {
  * @return {boolean} True if user profile exists, else False. 
  */
 export async function uidProfileExists(id) {
-    console.debug("API CALL: uidProfileExists")
+    console.debug("API CALL:  account_utils.uidProfileExists")
     const userDataRef = doc(firebaseStorage, firestoreDbName, id)
     const docSnap = await getDoc(userDataRef)
     return docSnap.exists()
@@ -88,7 +88,7 @@ export async function uidProfileExists(id) {
  * @param user {} see createNewUserProfile(). 
  */
 export async function updateProfileContext(user) {
-    console.debug("API CALL: updateProfileContext")
+    console.debug("API CALL:  account_utils.updateProfileContext")
     const docSnapshot = await getDoc(
         doc(firebaseStorage, firestoreDbName, user.uid)
     )

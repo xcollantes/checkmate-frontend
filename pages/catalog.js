@@ -6,7 +6,7 @@ import {
 import Showcase from '../components/showcase'
 import CatalogCard from '../components/catalogCard'
 
-import { getAllProducts, getCategories, toProperCase } from '../firebase_utils/product_utils'
+import { getAllProducts, toProperCase } from '../firebase_utils/product_utils'
 
 import menuItems from '../catalog_data/categories.json'
 
