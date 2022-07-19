@@ -1,7 +1,12 @@
 import { useState, useEffect } from 'react'
 import {
-  Box, FormGroup, Grid,
-  FormControlLabel, Checkbox, TextField, Autocomplete
+  Box,
+  FormGroup,
+  Grid,
+  FormControlLabel,
+  Checkbox,
+  TextField,
+  Autocomplete
 } from '@mui/material'
 import Showcase from '../components/showcase'
 import CatalogCard from '../components/catalogCard'
@@ -74,14 +79,12 @@ export default function Catalog() {
   function handleSearchChange(event) {
     let { textContent } = event.target
     setProductsShow(allProducts.filter(product =>
-      product.name.toLowerCase() == textContent.toLowerCase()))
+      product.product_name.toLowerCase() == textContent.toLowerCase()))
   }
-
-  console.log(toProperCase("this is text"))
 
   /**
    * Render the search bar. 
-   * @returns 
+   * @returns JSX of the search bar. 
    */
   function catalogSearchBar() {
     return (
@@ -90,11 +93,11 @@ export default function Catalog() {
         autoComplete
         getOptionLabel={option => option.product_name}
         onChange={event => handleSearchChange(event)}
-        groupBy={option => option.category}
+        groupBy={option => toProperCase(option.category)}
 
         noOptionsText="No products found"
         renderInput={params => (
-          <TextField {...params} label="" variant="outlined" />
+          <TextField {...params} label="Search products" variant="outlined" />
         )}
       />
     )

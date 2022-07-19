@@ -51,6 +51,36 @@ Since the backend is a NoSQL database (Firebase), references between the `users`
 
 If references should be made, for example, get product data on user subscriptions, the common key should be the product ID in Firebase.
 
+## Catalog categories config
+
+To update the categories in the user facing catalog, change the
+`categories.json` file.  
+
+`_id` - Unique identifier as an integer.  Avoid re-using numbers.  Follow
+convention by adding next sequencial integer with new products.
+
+`name` - Title of category to display.  String is case-insenstive
+but keeps spaces.  This must match exactly (except in case) in product field
+for `catalog`.  
+
+`menuSelect` - Default state of the checkbox when user first loads page.  If
+`true`, the checkboxes will be selected on load.
+
+```json
+[
+    {
+        "_id": 1,
+        "name": "video games",
+        "menuSelect": false
+    },
+    {
+        "_id": 2,
+        "name": "Cars",
+        "menuSelect": false
+    }
+]
+```
+
 ## Image path naming
 
 Images are named with the same as the product ID.  This convention should hold until the one-to-one relationship with images to products exists.  In other words, this convention doesn't work if you have multiple images per one product.

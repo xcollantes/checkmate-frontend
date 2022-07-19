@@ -41,6 +41,9 @@ export function getCategories(productList) {
  * @param {String} text To convert. 
  */
 export function toProperCase(text) {
+    if (text == null || typeof text == "undefined") {
+        return ""
+    }
     const result = text.toLowerCase()
     const firstLetter = result.charAt(0).toUpperCase()
     return firstLetter.concat(result.slice(1, result.length))
